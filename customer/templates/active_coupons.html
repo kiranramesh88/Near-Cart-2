@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NearKart - Active Coupons</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#f9f9fc",
+                        "on-secondary-fixed": "#0e1d2b",
+                        "primary": "#002742",
+                        "on-primary-container": "#80a8d2",
+                        "on-tertiary-container": "#d2995f",
+                        "on-primary-fixed": "#001d33",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#3a4858",
+                        "tertiary": "#3a1e00",
+                        "primary-container": "#0a3d61",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dadadd",
+                        "tertiary-fixed-dim": "#f8ba7e",
+                        "on-primary-fixed-variant": "#1d4a6e",
+                        "primary-fixed-dim": "#a2caf6",
+                        "error-container": "#ffdad6",
+                        "secondary": "#526070",
+                        "inverse-on-surface": "#f1f0f4",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1e",
+                        "secondary-container": "#d3e1f4",
+                        "inverse-surface": "#2f3033",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#a2caf6",
+                        "secondary-fixed": "#d5e4f7",
+                        "surface-variant": "#e2e2e5",
+                        "surface-tint": "#386287",
+                        "background": "#f9f9fc",
+                        "secondary-fixed-dim": "#b9c8db",
+                        "on-secondary-container": "#566474",
+                        "surface-bright": "#f9f9fc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eeedf1",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-tertiary-fixed-variant": "#673d0b",
+                        "outline-variant": "#c2c7cf",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#cfe5ff",
+                        "outline": "#72777f",
+                        "on-tertiary-fixed": "#2c1600",
+                        "surface-container-high": "#e8e8eb",
+                        "tertiary-container": "#583100",
+                        "surface-container-low": "#f4f3f6",
+                        "tertiary-fixed": "#ffdcbe",
+                        "on-background": "#1a1c1e",
+                        "on-surface-variant": "#42474e"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { background-color: #F8FAFC; }
+    </style>
+</head>
+<body class="font-body text-on-surface">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-6 py-3 lg:px-10 shadow-sm">
+<div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-3 text-primary dark:text-white shrink-0">
+<div class="size-8 flex items-center justify-center bg-primary text-white rounded-lg">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">NearKart</h2>
+</div>
+<div class="hidden md:flex flex-1 max-w-xl mx-auto">
+<!-- <div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input id="searchInput" class="block w-full p-2.5 pl-10 text-sm text-slate-900 border border-slate-200 rounded-lg bg-slate-50 focus:ring-primary focus:border-primary dark:bg-slate-800 dark:border-slate-700 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary" placeholder="Search offers, stores, categories..." type="text"/>
+</div> -->
+</div>
+<div class="flex items-center gap-6 shrink-0">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-text-prmiary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-text-secondary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="{% url 'storelist' %}">Stores</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'active_coupons' %}">My Coupons</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'savedoffers' %}">Saved</a>
+</nav>
+<div class="flex gap-3">
+<div class="flex items-center gap-3 cursor-pointer group" onclick="document.getElementById('profile-panel').classList.remove('translate-x-full'); document.getElementById('profile-overlay').classList.remove('hidden');" style="background-image: url('{{ profile.profile_image.url }}');">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/10"></div>
+<div class="hidden sm:flex flex-col">
+<!-- <span class="text-sm font-bold text-slate-900 dark:text-white">{{ request.user|truncatechars:12 }}</span> -->
+<!-- <span class="text-[10px] font-medium text-primary uppercase tracking-wider">Gold Member</span> -->
+</div>
+<!-- <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">expand_more</span> -->
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<main class="ml-20 w-full min-h-screen p-6 md:p-8">
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-2xl font-extrabold text-primary tracking-tight">Active Coupons</h1>
+<p class="text-on-surface-variant text-sm mt-1">Found {{ coupons_count }} savings near your current location</p>
+</div>
+</header>
+<!-- Coupon Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+<!-- Coupon Card 1 (Urgent) -->
+{% for coupon in coupons %}
+<a href="{% url 'coupon_view' coupon.id %}">
+<div class="group bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-cyan-200 transition-all overflow-hidden flex flex-col">
+<div class="p-4 flex flex-col h-full">
+<div class="flex justify-between items-start mb-2">
+<span class="text-2xl font-black text-primary leading-tight">{{ coupon.offer.discount_percentage|floatformat:0 }}% OFF</span>
+<div class="flex items-center gap-1 text-error px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider {% if coupon.is_redeemed %}bg-green-50{% else %}bg-red-50{% endif %}">
+{% if coupon.remaining_minutes < 60 and not coupon.is_redeemed %}
+        <span class="text-xs text-red-500 font-bold">Expiring Soon</span>
+{% endif %}
+{% if coupon.is_redeemed %}
+<span class="text-xs text-green-500 font-bold">Redeemed</span>
+{% endif %}
+
+                            </div>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center overflow-hidden border border-slate-100">
+<img class="w-full h-full object-cover" data-alt="modern minimalist cafe logo with coffee bean icon and clean typography" src="{{ coupon.shop.logo.url }}"/>
+</div>
+<div>
+<h3 class="font-bold text-sm text-on-surface leading-none">{{ coupon.shop.shop_name }}</h3>
+<p class="text-[11px] text-on-surface-variant">{{ coupon.shop.city }}</p>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-dashed border-slate-200 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase font-semibold">Code</span>
+<span id="couponCode" class="text-sm font-mono font-bold text-primary">{{ coupon.code }}</span>
+</div>
+<button onclick="copyCoupon()" class="bg-primary text-white hover:bg-primary-container px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+                                Copy
+                            </button>
+</div>
+</div>
+</div></a>
+{% endfor %}
+</div>
+<!-- Load More Section -->
+</main>
+</div>
+<!-- Floating Mobile Filter Button -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden" id="profile-overlay" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); this.classList.add('hidden');" style="background-image: url('{{ profile.profile_image.url }}');"></div>
+<div class="fixed right-0 top-0 h-full w-[340px] bg-white dark:bg-slate-900 z-[70] shadow-2xl transition-transform duration-300 translate-x-full flex flex-col" id="profile-panel">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold dark:text-white">Profile</h2>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); document.getElementById('profile-overlay').classList.add('hidden');">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl mb-8">
+<div class="h-14 w-14 rounded-full bg-slate-200 bg-cover bg-center" style="background-image: url('{{ profile.profile_image.url }}');"></div>
+<div>
+<h3 class="font-bold dark:text-white">{{ request.user|truncatechars:12 }}</h3>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 text-primary font-semibold" href="">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'savedoffers' %}">
+<span class="material-symbols-outlined">favorite</span> Saved Offers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'active_coupons' %}">
+<span class="material-symbols-outlined">local_activity</span> Active Coupons
+            </a>
+<div class="pt-4 pb-2">
+<span class="px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Settings</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'customerprofile' %}">
+<span class="material-symbols-outlined">person</span> Profile
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">notifications</span> Notifications
+            </a>
+</nav>
+<a href="{% url 'logout' %}">
+<button class="mt-auto flex items-center justify-center gap-2 w-full p-4 border border-slate-200 dark:border-slate-700 rounded-xl font-bold text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">logout</span> Logout
+        </button></a>
+</div>
+</div>
+<script>
+function copyCoupon() {
+    const code = document.getElementById("couponCode").innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+        
+        // Show "Copied!" message
+        const msg = document.getElementById("copyMsg");
+        msg.classList.remove("hidden");
+
+        setTimeout(() => {
+            msg.classList.add("hidden");
+        }, 1500);
+        const icon = event.currentTarget.querySelector("span");
+        icon.innerText = "check";
+
+        setTimeout(() => {
+            icon.innerText = "content_copy";
+        }, 1500);
+    }).catch(err => {
+        console.error("Failed to copy:", err);
+    });
+}
+</script>
+</body></html>

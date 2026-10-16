@@ -1,0 +1,445 @@
+<!-- Trending Offers Page -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a3d61",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .offer-card:hover .hover-overlay { opacity: 1; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex flex-col min-h-screen w-full overflow-x-hidden">
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 md:px-10 py-3">
+<div class="max-w-7xl mx-auto flex items-center justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">NearKart</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary font-semibold text-sm hover:opacity-80 transition-opacity" href="#">Offers</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium text-sm hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium text-sm hover:text-primary transition-colors" href="#">Stores</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<div class="hidden sm:flex flex-1 max-w-md items-center bg-primary/5 dark:bg-white/5 rounded-xl px-4 border border-primary/10">
+<span class="material-symbols-outlined text-primary/60">search</span>
+<input class="w-full border-none bg-transparent focus:ring-0 text-sm py-2 px-2" placeholder="Search trending deals..."/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="p-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto w-full px-4 md:px-10 py-8">
+<div class="mb-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Trending Offers</h1>
+<p class="text-slate-500 dark:text-slate-400">Handpicked deals from top-rated stores near you.</p>
+</div>
+<div class="flex items-center gap-2 p-1 bg-primary/5 rounded-xl border border-primary/10">
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold shadow-sm">Trending</button>
+<button class="px-4 py-2 text-primary hover:bg-primary/10 rounded-lg text-sm font-semibold transition-colors">Flash Deals</button>
+<button class="px-4 py-2 text-primary hover:bg-primary/10 rounded-lg text-sm font-semibold transition-colors">Near Me</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern boutique interior with clothing racks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWgIIL_M0g2Gv-pOS3Db93XeY7ZVi2yhcopAeFTiwNJhT-4PhzCmjslVoF-EJF8oBQGY9YqEk4b3SS18B2pvtA2h-4qLKbjYiPx5eHCeOy55SaZzUNE43OX6Pw-LtVjdA5cXPkINTr0BC8AB3gyS99mCv30cDvddFIiL2F1KVO51kXFuHgJL5N48Tr-KS_6o8ZLWFaEn3pKIWnjn1pf8-t43umJNMalUP97WOJxaQUFRZZXVg0pG49cZ_AX5FiCn7v0twGb66ylqM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sell</span>
+                            50% OFF
+                        </div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
+<div class="size-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider">Open Now</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                0.8 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                High Popularity
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Fashion Hub Premium</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.8</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Exclusive summer collection sale on all premium brands and accessories.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-red-500">04h : 22m : 15s</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="High tech electronics and gadgets display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOBUgVIIwDkbD4C3lSHeMz_sQEQddHGHJ84jEjByn4Gj7YyzmO0mWAYVg2oD2uyw7P7UMqbQrty-Nbz2i4LBnRvb9rsIbLsBgznR4T1pP4vyf_5G4CGnKRFTp3_xoLCEPMxmrYAfse_PCz3BQm0Ac6iomLmDVsMx0Mm6J6iFdljQKOPG_kymcZf1GFxqGhCkQOMY9Tqw1Ty4RfC_BYXpAhYGvTE2E20ye2Y1epNF23JjDmQLFN7gvBOt-41JljMQFjYnVtMgeZAnk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">redeem</span>
+                            BOGO DEAL
+                        </div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                1.2 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">group</span>
+                                200+ Redeemed
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Tech World Store</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.5</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Buy any smart accessory and get a wireless charger absolutely free.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">12h : 45m : 30s</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Elegant restaurant table setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7gW-8I0YmkjtTcqwBLWcxYMBOaAR4FmnLqU-R6kvrk0EWXguAs8JOTXJWbEq3siHN1QWKwOdX2sir2bgAGb6y5ZkafoIs1cpLRjbZI8VPBZIIrz3HbLS5DkT_DPaxgTfDrcz2jD4a9nRCIhr2O647sYQSxbv28S3vDw0oQwlDjBSkRqvigqxHMz1sMucUGalqtWSoQFhEpSp9K6IKcespxT5GQhitt7W6pCY-7prCqO5TaDQopoWV9VzJ9fe3X5Fb0M1jUL9WxK8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">restaurant</span>
+                            30% OFF
+                        </div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider">Open Now</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                2.5 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                                Burning Fast
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Gourmet Garden</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.9</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Indulge in authentic Italian cuisine with an exclusive weekday discount.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-red-500">02h : 10m : 05s</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern home interior with designer furniture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHvFc8ky8JTXONwv9HvyljoKhGrFbbEosmqk9JYECVsiu-MoIXZQbAEjunHhCJphG9dEZugGzFkA7sUVu3pZT6iMedNxfwpZJ8IkLJp0WR0llXBfXYqvdl_5uKewSD8d1C3HV307gwPEt8ZWKJpUBmMpNHLlhnBWp7hvYMfEoKi2cTq5j5z9thxs9zj_14GTYIum8W2t1H8_6AzWLom3cknqOw5OjwBpH66O7_l3tQ7GV-0MumrmqyYtWHmnYHiTtMrnxcjhoIUSg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">home</span>
+                            $20 OFF
+                        </div>
+<div class="absolute top-3 right-3 bg-slate-100/90 dark:bg-slate-800/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
+<div class="size-2 rounded-full bg-slate-400"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Closed</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                3.1 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                                1.5k views
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Urban Living Decor</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.2</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Flat discount on all home decor items for a purchase above $100.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">2 days left</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Well-equipped fitness gym interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhR-2_NzVXvwiHeiBzACzQr81LzG-d8jCXIQP8sQ2X-9c6hBXORGB9eq1--JDbeIteJyh9JMHET9rwLPQ7tZYVlZc-4Apclb5y8YLDnax23a1nb789heJ-sOEzudjVxvhodVbJh1Im7sKdHdL3y715Afg7ok0IoheV-gMgMPNuKN1bSROvJ0kWxOiUUxLLuwAIwOGrh1NYM3AuddSlleJcwZQcCoZ3rfZqyoVOAuxyrbRnF1v2ExpUq7g_82CEPvdPnn3pNyLGjsc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">fitness_center</span>
+                            FREE TRIAL
+                        </div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider">Open Now</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                1.5 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">new_releases</span>
+                                Trending Now
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Elite Fitness Studio</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.7</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Get 7 days of premium access to all our gym facilities for free.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">5 days left</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Luxury beauty salon with vanity mirrors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPFDd-gtIILw7B4MnUvKckJ3As_NMR5eC6PEYPSSopk3XtiAlMvYBXZHXci9SM4Dn2pLp6xkJZh9VMIDGAXN4DjN-ml-RDPGlBRWi71DCqqwLWe0Ng1u-ehozhShOWlTFfN34v1s772gyVGTGTNTBZm_S6afYNPQp0YJctkDSf0Yd8ra_lF3j2XuXQ6g9--xZIHtZmIndxvpbg6vAjHaKHD0Rc1Zp8G63hRKewvUqbTnRUZg4GRIMSk0DXaTMwezW9eZ0w6v4SPo4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-pink-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">face</span>
+                            FLASH DEAL
+                        </div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider">Open Now</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                0.4 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+                                Selling Fast
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Beauty Lane Spa</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.6</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">40% off on premium facial and massage packages for the next 2 hours.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-red-500">01h : 45m : 12s</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Selection of organic fresh vegetables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuUE222tGBhiSwEht8eye-G1ywULJfJgm2pBJS1Up94RD8ZDYbV_v35ptiU8VtcY8gfatBgzfO8vP8NizH5uz0d7LCxkfZvSFXpGQ9RxDvPcKPvsJNo-HTI7yDDPD1bgZmyVEpCGq665nJYlgQbemZoQN7HGGGVMZqUPyJpsa9qYbEBy9mCWZitu5OR8245Ydjk_imzc2NZUF7N88u1Hhynoxk-SSvm0gZxWq2TeORYrpSUOayrNBGGTBXaZ1bsFaaFglSp5-NwkA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">eco</span>
+                            25% OFF
+                        </div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] font-bold uppercase tracking-wider">Open Now</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                1.8 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+                                Local Favorite
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Organic Mart</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.4</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Fresh farm-to-table organic vegetables at discounted rates.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">08h : 12m : 45s</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-primary/5 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Selection of travel bags and backpacks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAd74_LskpBC156-Tc4yem15L650E51Ed4c_f_usEy0xyN7_AplGG63FRM94FXV0ctIZ3hJBVhc73DJaaJnww0JFr8wSK64eQAnuJ5d9PL-btPO_sfiw4XZ6gG5YphwLSkpAs2GtdgdyaU1yBYgqcNO3vMpxl74Phk6E-fmmjo9MacvFHQE0K9SsvCQR2AKrTn7_v4dDLPIdM0PFIS__q6tNAmNI_mj56ARa7jearkFkxV5eAfdsj5kdQso3llWcyUriYhjM8iqpM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">luggage</span>
+                            TRAVEL SALE
+                        </div>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<div class="flex items-center gap-1 text-white text-xs font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                4.2 km
+                            </div>
+<div class="flex items-center gap-1 text-white text-xs font-medium bg-primary/40 backdrop-blur-sm px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                                Official Store
+                            </div>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Adventure Gear Co.</h3>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-[18px] fill-amber-500">star</span>
+<span class="text-xs font-bold ml-1">4.3</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Gear up for your next trip with 15% off on all travel accessories.</p>
+<div class="mt-auto flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Expires in</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">1 day left</span>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-center">
+<button class="px-8 py-3 bg-white dark:bg-slate-900 border border-primary/20 text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm">
+                    Load More Offers
+                </button>
+</div>
+</main>
+<footer class="mt-auto border-t border-primary/10 py-10 px-4 md:px-10 bg-white dark:bg-background-dark">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-primary/60">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-bold">NearKart</span>
+</div>
+<div class="flex gap-8 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+<p class="text-xs text-slate-400">© 2024 NearKart. All rights reserved.</p>
+</div>
+</footer>
+</div>
+</body></html>
+
+<!-- Saved Offers Page -->
+
+
+<!-- Store Listing Page -->

@@ -1,0 +1,146 @@
+{% comment %} offer_card.html {% endcomment %}
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative {% if offer.is_expired %}opacity-60{% endif %}">
+<!-- Image Area -->
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Product Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="{{ offer.image.url }}"/>
+
+<!-- Pulse Badge -->
+<div class="absolute top-3 left-3 flex items-center">
+<span class="relative flex h-3 w-3 mr-2">
+{% if not offer.is_expired %}
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+{% endif %}
+<span class="relative inline-flex rounded-full h-3 w-3 {% if offer.is_expired %}
+    bg-gray-400
+{% else %}
+    bg-green-500
+{% endif %}"></span>
+</span>
+<span class="text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md {% if offer.is_expired %}
+    bg-gray-400
+{% else %}
+    bg-green-500
+{% endif %}">
+{{ offer.discount_percentage|floatformat:2 }}% OFF
+</span>
+</div>
+
+<!-- Distance Badge -->
+{% if offer.distance is not None %}
+<div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded-full text-xs">
+    {% if offer.distance == 0 %}
+        📍 Nearby
+    {% else %}
+        📍 {{ offer.distance|floatformat:1 }} km
+    {% endif %}
+</div>
+{% endif %}
+</div>
+
+<!-- Content Area -->
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-primary transition-colors">
+{{ offer.title }}
+</h3>
+<p class="text-sm text-text-primary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">store</span>
+{{ offer.shop.shop_name }}
+<!-- rating -->
+  <!-- Rating Badge -->
+    
+    <span class="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-semibold">
+        ⭐ {{ offer.shop.rating|floatformat:1 }}
+    </span>
+    
+</p>
+{% if offer.shop.is_open_now %}
+        <span class="text-green-600 text-xs font-semibold ">
+              Open
+        </span>
+    {% else %}
+        <span class="text-red-400 text-xs font-semibold ">
+            Closed
+        </span>
+    {% endif %}
+<p class="text-sm text-text-secondary flex items-center gap-1 mt-0.5">{{ offer.shop.city }},{{ offer.shop.district }}</p>
+</div>
+<!-- SAVE BUTTON -->
+<button 
+data-url="{% url 'togglesave' offer.id %}" 
+onclick="toggleSave(this)" 
+class="material-symbols-outlined text-[22px] transition-all
+{% if offer.is_saved %} text-red-500 {% else %} text-gray-400 {% endif %}"
+style="font-variation-settings: '{% if offer.is_saved %}FILL 1{% else %}FILL 0{% endif %}';">
+
+{% if offer.is_saved %}favorite{% else %}favorite_border{% endif %}
+
+</button>
+</div>
+
+<!-- Price & Stock -->
+<div class="flex items-center gap-3 mb-4 mt-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white">
+₹{{ offer.discount_price }}
+</span>
+<span class="text-sm text-text-secondary line-through decoration-red-400">
+₹{{ offer.original_price }}
+</span>
+{% if offer.is_coupon_based %}
+{% if offer.coupons_remaining > 0 and not offer.is_expired %}
+<span class="ml-auto text-xs font-medium text-orange-600 bg-orange-50 dark:bg-orange-900/20 px-2 py-0.5 rounded border border-orange-100 dark:border-orange-800">
+{{ offer.coupons_remaining }} left
+</span>
+{% elif offer.coupons_remaining == 0 and not offer.is_expired %}
+<span class="ml-auto text-xs font-medium text-red-600 bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded border border-red-100 dark:border-red-800">
+SOLD OUT
+</span>
+{% endif %}
+{% endif %}
+</div>
+
+<!-- Meta & Verification -->
+<div class="flex items-center gap-2 mb-5">
+
+{% if offer.shop.is_verified %}
+<div class="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-2 py-1 rounded text-[10px] font-semibold border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+Verified
+</div>
+{% endif %}
+
+
+{% if offer.time_remaining != "expired" %}
+<div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 text-text-secondary px-2 py-1 rounded text-[10px] font-medium border border-slate-100 dark:border-slate-700">
+    <span class="material-symbols-outlined text-[12px]">schedule</span>
+    {{ offer.time_remaining }}
+</div>
+{% else %}
+<div class="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 text-red-600 px-2 py-1 rounded text-[10px] font-medium border border-red-100 dark:border-red-800">
+    <span class="material-symbols-outlined text-[12px]">error</span>
+    Expired
+</div>
+{% endif %}
+</div>
+
+<!-- Action -->
+<a href="{% url 'offer_details' offer.id %}">
+<button class="mt-auto w-full py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2
+{% if offer.is_expired %}
+bg-gray-400 cursor-not-allowed
+{% else %}
+bg-gradient-to-r from-primary to-[#0f5485] text-white hover:shadow-lg
+{% endif %}">
+    
+    {% if offer.is_expired %}
+        Expired
+    {% else %}
+        Reveal Offer
+        <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+
+    {% endif %}
+</button>
+</a>
+</div>
+</div>

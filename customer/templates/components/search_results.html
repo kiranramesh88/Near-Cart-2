@@ -1,0 +1,5 @@
+{% for offer in offers %}
+    {% include "components/offer_card.html" %}
+{% empty %}
+    <p>No offers found</p>
+{% endfor %}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Review Dashboard - NearKart</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0a3d61",
+              "accent": "#ff6b00", 
+              "background-light": "#ffffff",
+              "background-subtle": "#f8fafc",
+              "text-main": "#0f172a",
+              "text-muted": "#64748b",
+              "border-color": "#e2e8f0"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "2xl": "1.5rem",
+              "full": "9999px"
+            },
+            boxShadow: {
+              "subtle": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+              "card": "0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)",
+              "fab": "0 10px 15px -3px rgba(255, 107, 0, 0.3), 0 4px 6px -2px rgba(255, 107, 0, 0.1)"
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-subtle text-text-main antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-30 flex items-center justify-between border-b border-border-color bg-background-light px-6 py-4 shadow-subtle lg:px-10">
+<div class="flex items-center gap-8">
+<div class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined block">local_mall</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">NearCart</h1>
+ <!-- <span class="text-slate-500 font-medium">Vendor</span> -->
+</div>
+<nav class="hidden md:flex items-center gap-8">
+
+<a href="{% url 'myoffers' %}"
+   class="{% if request.resolver_match.url_name == 'myoffers' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Offers
+</a>
+
+<a href="{% url 'vendorreview' %}"
+   class="{% if request.resolver_match.url_name == 'vendorreview' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Reviews
+</a>
+
+<a href="{% url 'verifyshop' %}"
+   class="{% if request.resolver_match.url_name == 'verifyshop' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Verification
+</a>
+
+<a href="{% url 'vendordash' %}"
+   class="{% if request.resolver_match.url_name == 'vendordash' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Dashboard
+</a>
+<a href="{% url 'redeem_coupon' %}"
+   class="{% if request.resolver_match.url_name == 'redeem_coupon' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Coupon Redemption
+</a>
+
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-l border-border-color pl-6">
+<button class="relative text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<!-- <button class="text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button> -->
+<div onclick="togglePanel()" class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm ring-1 ring-border-color" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsmytuvGbv2K9-xGpXosy3H3GWNAiKKldSBFvTNIpizOPlnm54x1brPUwWeP2QatbmREWxvMmuv5-dcNWsjx5Ud70ETACwJDxntFSatpWxhdvXD147pgYc5D-aWZadnetNjQtyChizGFrvFRE7j_NGfaJ3_gewM3TxSc4iFXsov8h0D5LKB0fnPcrVoYd0L23nf-e7fbOatV306Tw6tgbQNrLyKtCkR0HkrxnX9AVDsCyT5JuWsChNXCmOGTYOZBoxbxfH7y-chK0')"></div>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-[1440px] mx-auto px-4 md:px-6 lg:px-10 py-8">
+<!-- Header Section -->
+<header class="mb-8">
+<h1 class="text-3xl font-bold text-text-main tracking-tight mb-2">Customer Reviews</h1>
+<p class="text-text-muted text-lg">See what customers are saying about your shop and offers</p>
+</header>
+<!-- Summary KPIs Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Avg Rating -->
+<div class="bg-background-light p-6 rounded-2xl border border-border-color shadow-card hover:shadow-lg transition-shadow duration-300 flex items-center justify-between">
+<div>
+<p class="text-text-muted text-sm font-medium uppercase tracking-wider mb-1">Average Rating</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-text-main">{{ avg_rating }}</span>
+<div class="flex text-accent">
+{% for star in stars %}
+{% if star == "full" %}
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star</span>
+{% elif star == "half" %}
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star_half</span>
+{% else %}
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star_outline</span>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+</div>
+<div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+<span class="material-symbols-outlined text-3xl">analytics</span>
+</div>
+</div>
+<!-- Total Reviews -->
+<div class="bg-background-light p-6 rounded-2xl border border-border-color shadow-card hover:shadow-lg transition-shadow duration-300 flex items-center justify-between">
+<div>
+<p class="text-text-muted text-sm font-medium uppercase tracking-wider mb-1">Total Reviews</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-text-main">{{ total_reviews }}</span>
+<span class="flex items-center text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span> +12%
+                    </span>
+</div>
+</div>
+<div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
+<span class="material-symbols-outlined text-3xl">forum</span>
+</div>
+</div>
+<!-- Trust Score -->
+<div class="bg-background-light p-6 rounded-2xl border border-border-color shadow-card hover:shadow-lg transition-shadow duration-300 flex items-center justify-between">
+<div>
+<p class="text-text-muted text-sm font-medium uppercase tracking-wider mb-1">Trust Score</p>
+<div class="flex items-center gap-3">
+<span class="text-2xl font-bold text-text-main uppercase">{% if avg_rating >= 4 %}
+TOP RATED
+{% elif avg_rating >= 3 %}
+GOOD
+{% else %}
+LOW
+{% endif %}</span>
+{% if shop.is_verified %}
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span> Verified
+                    </span>
+{% endif %}
+</div>
+</div>
+<div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
+<span class="material-symbols-outlined text-3xl">award_star</span>
+</div>
+</div>
+</section>
+<!-- Tabs Section -->
+<div class="border-b border-border-color mb-8">
+<div class="flex gap-10">
+<button class="pb-4 text-primary font-bold text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-accent">
+                Offer Reviews
+            </button>
+</div>
+</div>
+<!-- Offer Group 1 -->
+{% for offer in offer_reviews %}
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-text-main tracking-tight">{{ offer.title }}</h2>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">{{ offer.review_count }} Reviews</span>
+</div>
+{% if total_offers > 3 and not show_all %}
+<a href="?all=true"><button class="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">View All</button>
+</a>
+{% endif %}
+{% if show_all %}
+<a href="?" class="text-primary text-sm font-semibold">
+    Show less
+</a>
+{% endif %}
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+{% for review in offer.reviews %}
+<!-- Review Card 1 -->
+<div class="bg-background-light p-6 rounded-2xl border border-border-color shadow-card hover:shadow-lg transition-shadow duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold">{{ review.user.username|slice:":2"|upper }}</div>
+<div>
+<h4 class="font-bold text-sm text-text-main">{{ review.user.username }}</h4>
+<p class="text-xs text-text-muted">{{ review.created_at|timesince }} ago</p>
+</div>
+</div>
+<div class="flex text-accent scale-90 origin-right">
+{% for i in "12345" %}
+{% if review.rating >= forloop.counter %}
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+{% else %}
+<span class="material-symbols-outlined text-lg">star</span>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+<p class="text-sm text-text-main leading-relaxed mb-6">{{ review.comment }}</p>
+<div class="flex gap-3">
+<button class="flex items-center gap-1.5 text-xs font-bold text-primary px-3 py-1.5 rounded-lg hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">reply</span> Reply
+                    </button>
+<button class="flex items-center gap-1.5 text-xs font-bold text-text-muted px-3 py-1.5 rounded-lg hover:bg-background-subtle transition-colors">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span> Helpful
+                    </button>
+</div>
+</div>
+{% endfor %}
+</div>
+</section>
+{% endfor %}
+</section>
+</main>
+<!-- Floating Action Button -->
+<!-- <div class="fixed bottom-8 right-8 z-40">
+<button class="group flex items-center gap-2 bg-accent text-white px-6 py-4 rounded-full shadow-fab hover:bg-[#e66000] hover:scale-105 transition-all duration-300">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="font-bold text-base whitespace-nowrap">Request Reviews</span>
+</button>
+</div> -->
+<!-- Footer -->
+<footer class="bg-background-light border-t border-border-color flex flex-col md:flex-row justify-between items-center px-10 py-10 w-full mt-auto">
+<div class="mb-6 md:mb-0">
+<p class="text-sm font-normal text-text-muted">© 2024 NearKart Vendor Portal. Built for The Pragmatic Architect.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-text-muted hover:text-primary transition-all text-sm font-medium" href="#">Privacy Policy</a>
+<a class="text-text-muted hover:text-primary transition-all text-sm font-medium" href="#">Terms of Service</a>
+<a class="text-text-muted hover:text-primary transition-all text-sm font-medium" href="#">Support</a>
+<a class="text-text-muted hover:text-primary transition-all text-sm font-medium" href="#">Documentation</a>
+</div>
+</footer>
+</body></html>

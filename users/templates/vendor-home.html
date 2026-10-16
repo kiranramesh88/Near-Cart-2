@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NearKart Vendor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a3d61",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-gradient {
+            background: linear-gradient(135deg, #0a3d61 0%, #1a5d8b 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display h-screen overflow-hidden">
+<div class="flex h-full w-full">
+<!-- Main Content Area -->
+<div class="flex flex-col flex-1 h-full relative">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between border-b border-primary/10 bg-white dark:bg-slate-900 px-8 py-3 z-10">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-primary text-xl font-bold tracking-tight">NearKart</h2>
+</div>
+<nav class="flex items-center gap-8">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1 text-sm" href="{% url 'vendorhome' %}">Dashboard</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-medium text-sm" href="{% url 'createshop' %}">Create Shop</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-primary/5 text-slate-600">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<!-- Profile avatar — shows first letter if no image -->
+<div onclick="togglePanel()"
+     class="size-10 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center overflow-hidden cursor-pointer">
+    {% if data.vendor_profile.profile_image %}
+        <img src="{{ data.vendor_profile.profile_image.url }}"
+             class="w-full h-full object-cover">
+    {% else %}
+        <span class="text-primary font-bold text-sm">{{ data.username|first|upper }}</span>
+    {% endif %}
+</div>
+</div>
+</header>
+<!-- Centered State 1 Content -->
+<main class="flex-1 overflow-y-auto flex justify-center pt-8 px-4">
+<div class="w-full max-w-4xl flex flex-col items-center space-y-10">
+<!-- Hero Section -->
+<div class="max-w-2xl w-full text-center flex flex-col items-center">
+<div class="w-48 h-48 mb-6 bg-primary/5 rounded-full flex items-center justify-center relative">
+<div class="absolute inset-0 opacity-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[120px]">storefront</span>
+</div>
+<div class="relative z-10 size-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-primary/10 p-6 flex flex-col justify-end gap-2">
+<div class="h-4 w-2/3 bg-primary/20 rounded"></div>
+<div class="h-4 w-full bg-primary/10 rounded"></div>
+<div class="h-8 w-1/2 bg-primary/40 rounded mt-4"></div>
+</div>
+<div class="absolute top-10 right-10 size-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white">add</span>
+</div>
+</div>
+<h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2">Start Your Business on NearKart</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm max-w-md text-center mb-5">
+                        You haven't created your shop yet. Join thousands of local vendors reaching nearby customers today.
+                    </p>
+<a href="{% url 'createshop' %}"><button class="custom-gradient text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-transform active:scale-95 flex items-center gap-3">
+<span class="material-symbols-outlined">add_business</span>Create Your Shop
+</button></a>
+</div>
+<!-- Benefits Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm flex flex-col items-start gap-4">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-1">Reach nearby customers</h3>
+<p class="text-sm text-slate-500">Get discovered by locals looking for products in your category.</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm flex flex-col items-start gap-4">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">sell</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-1">Publish offers instantly</h3>
+<p class="text-sm text-slate-500">Attract buyers with exclusive daily deals and flash sales.</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm flex flex-col items-start gap-4">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-1">Track performance</h3>
+<p class="text-sm text-slate-500">Detailed sales analytics and customer footfall tracking.</p>
+</div>
+</div>
+</div>
+<!-- Step Indicator -->
+<div class="flex items-center gap-4 py-8">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">1</div>
+<span class="text-xs font-bold text-primary uppercase tracking-widest">Shop Profile</span>
+</div>
+<div class="h-px w-12 bg-primary/20"></div>
+<div class="flex items-center gap-2 opacity-40">
+<div class="size-8 rounded-full border-2 border-slate-300 text-slate-400 flex items-center justify-center text-xs font-bold">2</div>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Verification</span>
+</div>
+<div class="h-px w-12 bg-primary/20"></div>
+<div class="flex items-center gap-2 opacity-40">
+<div class="size-8 rounded-full border-2 border-slate-300 text-slate-400 flex items-center justify-center text-xs font-bold">3</div>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Go Live</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<!-- Overlay for profile panel -->
+<div id="overlay" class="fixed inset-0 bg-black/40 z-40 hidden" onclick="togglePanel()"></div>
+
+<!-- Profile Side Panel -->
+<aside id="profilePanel"
+class="w-80 bg-white dark:bg-slate-900 fixed right-0 top-0 h-full shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col p-3">
+
+<div class="flex justify-between items-center mb-6">
+    <h3 class="font-bold text-lg">Profile</h3>
+    <button onclick="togglePanel()">✕</button>
+</div>
+
+<div class="p-8 flex flex-col items-center text-center">
+<div class="relative group">
+<div class="size-24 rounded-full overflow-hidden border-4 border-primary/10 shadow-lg mb-4 bg-primary/5 flex items-center justify-center">
+    {% if data.vendor_profile.profile_image %}
+        <img src="{{ data.vendor_profile.profile_image.url }}"
+             class="w-full h-full object-cover">
+    {% else %}
+        <span class="text-2xl font-bold text-primary">{{ data.username|first|upper }}</span>
+    {% endif %}
+</div>
+</div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-slate-100">
+    {{ data.first_name|default:data.username }}
+</h2>
+<p class="text-primary font-medium text-sm">Vendor</p>
+</div>
+<div class="px-6 space-y-1">
+<div class="flex items-center gap-4 px-4 py-3 rounded bg-primary text-white shadow-md shadow-primary/20">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</div>
+<a href="{% url 'createshop' %}"><div class="flex items-center gap-4 px-4 py-3 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-medium text-sm">Create Shop</span>
+</div></a>
+</div>
+<div class="my-6 border-t border-primary/5 px-10"></div>
+<div class="px-10 space-y-4 pb-10 mt-auto">
+<a href="{% url 'logout' %}" class="block">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded bg-rose-50 text-rose-600 font-bold text-sm hover:bg-rose-100 transition-all dark:bg-rose-900/20 dark:text-rose-400">
+<span class="material-symbols-outlined text-lg">logout</span>
+                    Logout
+            </button>
+</a>
+</div>
+<div class="px-10 pb-6 text-center">
+<p class="text-xs text-slate-400">NearKart Vendor v2.4.1</p>
+</div>
+</aside>
+</div>
+
+<!-- SCRIPT -->
+<script>
+function togglePanel() {
+    const panel = document.getElementById("profilePanel");
+    const overlay = document.getElementById("overlay");
+
+    panel.classList.toggle("translate-x-full");
+    overlay.classList.toggle("hidden");
+}
+</script>
+</body></html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NearKart - Store Details</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a3d61",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                        "neutral-surface": "#ffffff",
+                        "neutral-surface-dark": "#1a2632",
+                        "text-main": "#0e161b",
+                        "text-sub": "#4d7999",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200">
+<div class="flex min-h-screen flex-col">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-6 py-3 lg:px-10 shadow-sm">
+<div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-3 text-primary dark:text-white shrink-0">
+<div class="size-8 flex items-center justify-center bg-primary text-white rounded-lg">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">NearKart</h2>
+</div>
+<div class="hidden md:flex flex-1 max-w-xl mx-auto">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input id="searchInput" class="block w-full p-2.5 pl-10 text-sm text-slate-900 border border-slate-200 rounded-lg bg-slate-50 focus:ring-primary focus:border-primary dark:bg-slate-800 dark:border-slate-700 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary" placeholder="Search offers, stores, categories..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6 shrink-0">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-text-secondary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-text-secondary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="{% url 'storelist' %}">Stores</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'active_coupons' %}">My Coupons</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'savedoffers' %}">Saved</a>
+</nav>
+<div class="flex gap-3">
+<div class="flex items-center gap-3 cursor-pointer group" onclick="document.getElementById('profile-panel').classList.remove('translate-x-full'); document.getElementById('profile-overlay').classList.remove('hidden');">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASuhoFBi4GigAiI-8pXVL06IqYy-cmxLCtV3ZMWO6HEqmpKvsvcGS1xsrR3hwIFRHHis3VSXBlFontaJnNJHfMwqWPZZ86nkAXDZfPS0NyvWZxqHLAEA99ufq0w1yd5V1ZjpPpoJUC2z0NxSPlw0KT1HpiJ-ZXIKsZwF9SJytecttarGu7Ac1fkFKN1TTIDwqsaHrBjKNZsLPo_ykabW90nvgIxlRNkDZSw8XswNh4eyPFy02U8YZjVTYDziDPr4mceUlWRL388aA');"></div>
+<div class="hidden sm:flex flex-col">
+<!-- <span class="text-sm font-bold text-slate-900 dark:text-white">{{ request.user|truncatechars:12 }}</span> -->
+<!-- <span class="text-[10px] font-medium text-primary uppercase tracking-wider">Gold Member</span> -->
+</div>
+<!-- <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">expand_more</span> -->
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Content -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Store Header Card -->
+<div class="bg-neutral-surface dark:bg-neutral-surface-dark rounded-lg overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="h-48 md:h-64 w-full bg-cover bg-center relative" data-alt="Modern grocery store interior with fresh produce" style="background-image: url('{{ shop.banner.url }}');">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 flex items-end">
+<div class="hidden md:block h-24 w-24 rounded-xl border-4 border-white dark:border-neutral-surface-dark shadow-lg bg-cover bg-center mr-4" data-alt="Green Valley Market logo on storefront" style="background-image: url('{{ shop.logo.url }}');"></div>
+<div class="text-white">
+<div class="flex items-center gap-2 mb-1">
+<h1 class="text-3xl font-bold tracking-tight">{{ shop.shop_name }}</h1>
+{% if shop.is_verified %}
+<span class="material-symbols-outlined text-whitefill-current" style="font-variation-settings: 'FILL' 1;">verified</span>
+{% endif %}
+</div>
+<div class="flex flex-wrap items-center gap-3 text-sm md:text-base font-medium text-slate-100">
+{% if shop.is_open_now %}
+<span class="bg-green-500 text-white px-2 py-0.5 rounded text-xs uppercase tracking-wide font-bold">Open Now</span>
+{% else %}
+<span class="bg-red-500 text-white px-2 py-0.5 rounded text-xs uppercase tracking-wide font-bold">Closed</span>
+
+{% endif %}
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-yellow-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span></span>
+<span>{{ shop.rating }}</span>
+<span>{{ shop.category }}</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Coupons Section -->
+<div>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold text-text-main dark:text-white">Active Offers</h3>
+{% if total_offers > 3 and not show_all %}
+<a href="?all=true" class="text-primary text-sm font-semibold">
+    View all ({{ total_offers }})
+</a>
+{% endif %}
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Coupon 1 -->
+{% for offer in offers %}
+    {% include "components/offer_card.html" %}
+{% endfor %}
+</div>
+</div>
+<!-- Community Status Section -->
+<div class="bg-gradient-to-br from-primary/5 to-transparent dark:from-sky-900/10 rounded-xl p-6 border border-primary/10 dark:border-sky-900/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary dark:text-sky-400 text-2xl">groups</span>
+<h3 class="text-xl font-bold text-text-main dark:text-white">Reviews</h3>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="divide-y divide-outline-variant">
+{% for review in reviews %}
+<div class="py-6 space-y-2 review-item {% if forloop.counter > 4 %}hidden{% endif %}">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a male customer in casual attire against a soft natural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1XYc4De7rAkrIOXM26Ot7Y2RH_OEzlfdX2G7B9Z-I6M3jATS15iz2f39QoHejlDlQrMwJMNZmrfkrltVV1j0eQNbaDdm0K3OAeSzLC_dHJTXxYGJcv5P2Gi046vHlVdeNaWSHrorMO_Lg94ZglsfhdmzK9bjLbb53aNjDXLr46xVf_xAaBeuN7liGiu6Gle1PlKYwcoeF2It4azL1tDFtJW25ACcgiXYUuxAvYtRnKbC-ZwdHUh8t7tZrxeRKDAV01BiziJiYUO8"/>
+<div>
+<p class="font-bold text-sm">{{ review.user.username }}</p>
+<p class="text-xs text-outline">{{ review.created_at|timesince }} ago</p>
+</div>
+</div>
+<div class="flex text-on-tertiary-container">
+{% for i in "12345" %}
+                {% if forloop.counter <= review.rating %}
+                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+                {% else %}
+                    <span class="material-symbols-outlined text-xs">star</span>
+                {% endif %}
+{% endfor %}
+</div>
+</div>
+<p class="text-on-surface-variant text-sm">{{ review.comment }}</p>
+</div>
+{% endfor %}
+<div class="text-center mt-4">
+    <button id="toggleReviewsBtn"
+        class="text-primary font-semibold text-sm hover:underline">
+        See All Reviews
+    </button>
+</div>
+</div>
+<!-- Item 2 -->
+
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Location & Hours Card -->
+<div class="bg-neutral-surface dark:bg-neutral-surface-dark rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 sticky top-24">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-text-main dark:text-white">Location</h3>
+<!-- <a href="https://www.google.com/maps/search/?api=1&query={{ shop.shop_name }} {{ shop.city }}">
+<button class="text-primary dark:text-sky-400 text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">directions</span>
+                                Get Directions
+                            </button></a> -->
+</div>
+<!-- Map Placeholder -->
+<div class="w-full aspect-video rounded-lg overflow-hidden mb-6 relative bg-slate-200 dark:bg-slate-700">
+<a 
+href="https://www.google.com/maps/search/?api=1&query={{ shop.shop_name }} {{ shop.city }}"
+target="_blank"
+class="flex-1">
+<img alt="Map showing store location in San Francisco" class="w-full h-full object-cover" data-location="San Francisco" src="https://i.pinimg.com/1200x/00/b5/8d/00b58d56ee4d422b4698e46a137debf9.jpg"/></a>
+<div class="absolute inset-0 flex items-center justify-center bg-black/5 pointer-events-none">
+<div class="bg-white dark:bg-slate-800 p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-red-500 text-2xl">location_on</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-3 mb-6">
+<span class="material-symbols-outlined text-text-sub dark:text-slate-400 mt-1">location_on</span>
+<div>
+<p class="text-text-main dark:text-white font-medium">{{ shop.address }}</p>
+<p class="text-text-sub dark:text-slate-400 text-sm">{{ shop.city }}, {{ shop.district }}, {{ shop.pincode }}</p>
+</div>
+</div>
+<hr class="border-slate-100 dark:border-slate-700 mb-6"/>
+<h3 class="text-lg font-bold text-text-main dark:text-white mb-4">Working Days</h3>
+<div class="space-y-3">
+<div class="flex justify-between text-sm">
+{% for i in shop.working_days %}
+<p class="text-text-main dark:text-slate-400">{{ i|upper }}</p>
+{% endfor %}
+</div>
+<h3 class="text-lg font-bold text-text-main dark:text-white mb-4">Opening Hours</h3>
+<h3 class="text-text-main dark:text-white font-medium">{{ shop.opening_time|time:"h:i A" }} - {{ shop.closing_time|time:"h:i A" }}</h3>
+
+</div>
+<div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
+<a 
+href="https://www.google.com/maps/search/?api=1&query={{ shop.shop_name }} {{ shop.city }}"
+target="_blank"
+class="flex-1">
+
+    <button class="w-full bg-gradient-to-r from-sky-700 to-sky-900 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2  active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-lg">directions</span>
+        Navigate
+    </button>
+
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden" id="profile-overlay" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); this.classList.add('hidden');"></div>
+<div class="fixed right-0 top-0 h-full w-[340px] bg-white dark:bg-slate-900 z-[70] shadow-2xl transition-transform duration-300 translate-x-full flex flex-col" id="profile-panel">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold dark:text-white">Profile</h2>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); document.getElementById('profile-overlay').classList.add('hidden');">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl mb-8">
+<div class="h-14 w-14 rounded-full bg-slate-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASuhoFBi4GigAiI-8pXVL06IqYy-cmxLCtV3ZMWO6HEqmpKvsvcGS1xsrR3hwIFRHHis3VSXBlFontaJnNJHfMwqWPZZ86nkAXDZfPS0NyvWZxqHLAEA99ufq0w1yd5V1ZjpPpoJUC2z0NxSPlw0KT1HpiJ-ZXIKsZwF9SJytecttarGu7Ac1fkFKN1TTIDwqsaHrBjKNZsLPo_ykabW90nvgIxlRNkDZSw8XswNh4eyPFy02U8YZjVTYDziDPr4mceUlWRL388aA');"></div>
+<div>
+<h3 class="font-bold dark:text-white">{{ request.user|truncatechars:12 }}</h3>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 text-primary font-semibold" href="">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'savedoffers' %}">
+<span class="material-symbols-outlined">favorite</span> Saved Offers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'active_coupons' %}">
+<span class="material-symbols-outlined">local_activity</span> Active Coupons
+            </a>
+<div class="pt-4 pb-2">
+<span class="px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Settings</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">person</span> Profile
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">notifications</span> Notifications
+            </a>
+</nav>
+<a href="{% url 'logout' %}">
+<button class="mt-auto flex items-center justify-center gap-2 w-full p-4 border border-slate-200 dark:border-slate-700 rounded-xl font-bold text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">logout</span> Logout
+        </button></a>
+</div>
+</div>
+</body></html>

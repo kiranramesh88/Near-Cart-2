@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NearKart - Offer Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#e8e8eb",
+                        "on-primary-container": "#80a8d2",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1a1c1e",
+                        "inverse-on-surface": "#f1f0f4",
+                        "on-secondary-container": "#566474",
+                        "tertiary-container": "#583100",
+                        "on-secondary-fixed": "#0e1d2b",
+                        "background": "#f9f9fc",
+                        "primary": "#002742",
+                        "tertiary-fixed-dim": "#f8ba7e",
+                        "surface-container-low": "#f4f3f6",
+                        "outline": "#72777f",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#a2caf6",
+                        "on-primary-fixed-variant": "#1d4a6e",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f9f9fc",
+                        "on-tertiary-fixed-variant": "#673d0b",
+                        "on-primary-fixed": "#001d33",
+                        "on-tertiary-container": "#d2995f",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1a1c1e",
+                        "surface-tint": "#386287",
+                        "inverse-surface": "#2f3033",
+                        "surface-dim": "#dadadd",
+                        "on-surface-variant": "#42474e",
+                        "error": "#ba1a1a",
+                        "primary-container": "#0a3d61",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e2e2e5",
+                        "secondary-fixed": "#d5e4f7",
+                        "tertiary-fixed": "#ffdcbe",
+                        "outline-variant": "#c2c7cf",
+                        "on-tertiary-fixed": "#2c1600",
+                        "inverse-primary": "#a2caf6",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#526070",
+                        "secondary-container": "#d3e1f4",
+                        "on-secondary-fixed-variant": "#3a4858",
+                        "primary-fixed": "#cfe5ff",
+                        "secondary-fixed-dim": "#b9c8db",
+                        "surface-container": "#eeedf1",
+                        "surface-variant": "#e2e2e5",
+                        "tertiary": "#3a1e00",
+                        "surface": "#f9f9fc",
+                        "on-error-container": "#93000a"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background font-body text-on-background antialiased">
+<!-- TopNavBar (Shared Component) -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-6 py-3 lg:px-10 shadow-sm">
+<div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-3 text-primary dark:text-white shrink-0">
+<div class="size-8 flex items-center justify-center bg-primary text-white rounded-lg">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">NearKart</h2>
+</div>
+<div class="hidden md:flex flex-1 max-w-xl mx-auto">
+<!-- <div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input id="searchInput" class="block w-full p-2.5 pl-10 text-sm text-slate-900 border border-slate-200 rounded-lg bg-slate-50 focus:ring-primary focus:border-primary dark:bg-slate-800 dark:border-slate-700 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary" placeholder="Search offers, stores, categories..." type="text"/>
+</div> -->
+</div>
+<div class="flex items-center gap-6 shrink-0">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-text-prmiary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-text-secondary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="{% url 'storelist' %}">Stores</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'active_coupons' %}">My Coupons</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'savedoffers' %}">Saved</a>
+</nav>
+<div class="flex gap-3">
+<div class="flex items-center gap-3 cursor-pointer group" onclick="document.getElementById('profile-panel').classList.remove('translate-x-full'); document.getElementById('profile-overlay').classList.remove('hidden');" style="background-image: url('{{ profile.profile_image.url }}');">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/10"></div>
+<div class="hidden sm:flex flex-col">
+<!-- <span class="text-sm font-bold text-slate-900 dark:text-white">{{ request.user|truncatechars:12 }}</span> -->
+<!-- <span class="text-[10px] font-medium text-primary uppercase tracking-wider">Gold Member</span> -->
+</div>
+<!-- <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">expand_more</span> -->
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<div class="pt-16 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 px-4 md:px-6 mb-24">
+<!-- Left Side: Main Offer Content -->
+<main class="flex-1 space-y-8 mt-6">
+<!-- Hero Section -->
+<section class="relative h-[300px] md:h-[450px] rounded-2xl overflow-hidden shadow-xl group">
+<img alt="Offer Image" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" data-alt="Close-up artistic shot of premium red athletic sneakers on a sleek dark pedestal with atmospheric lighting" src="{{ offer.image.url }}"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 md:p-10 text-white">
+<div class="flex items-center gap-2 mb-3">
+<!-- <span class="bg-on-tertiary-container text-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Flash Deal</span>
+<span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Low Stock: 4 Left</span> -->
+</div>
+<h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-2">{{ offer.title }}</h1>
+<p class="text-white/80 text-lg">{{ offer.description }}</p>
+</div>
+<button 
+    id="saveBtn"
+    class="absolute top-3 right-3 p-2 rounded-full transition"
+    onclick="toggleSave('{{ offer.id }}')"
+>
+    <span id="heartIcon"
+        class="material-symbols-outlined text-xl
+        {% if is_saved %}
+            text-red-500
+        {% else %}
+            text-white
+        {% endif %}"
+        style="font-variation-settings: 'FILL {% if is_saved %}1{% else %}0{% endif %}';"
+    >
+        favorite
+    </span>
+</button>
+</section>
+<!-- Offer Specifics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 space-y-8">
+<!-- Pricing & Coupon -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-outline-variant flex flex-col md:flex-row justify-between items-start md:items-center gap-6 w-full">
+<div>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-black text-primary">₹{{ offer.discount_price|floatformat:2 }}</span>
+<span class="text-xl text-outline line-through">₹{{ offer.original_price|floatformat:2 }}</span>
+</div>
+<div class="inline-block text-green-600 font-bold text-sm bg-green-50 px-2 py-0.5 rounded mt-1">
+    {{ offer.discount_percentage|floatformat:2 }}% OFF
+</div>
+<p class="text-outline text-sm mt-1 ">{{ offer.time_remaining }}</p>
+{% if offer.is_coupon_based %}
+<div class="flex items-center gap-2">
+{% if offer.coupons_remaining and not offer.is_expired %}
+<!-- <span class="bg-on-tertiary-container text-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Flash Deal</span> -->
+<span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mt-2">
+{{ offer.coupons_remaining }} left
+</span>
+{% endif %}
+</div>
+{% endif %}
+</div>
+{% if offer.is_coupon_based %}
+<!-- item count -->
+<div class="mt-4">
+
+    <p class="text-sm font-semibold mb-2">Select Quantity</p>
+
+    <div class="flex items-center gap-4">
+
+        <!-- Minus -->
+        <button 
+            onclick="changeQty(-1)" 
+            class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 text-xl font-bold">
+            -
+        </button>
+
+        <!-- Quantity Display -->
+        <input 
+            type="number" 
+            id="quantity" 
+            value="1" 
+            min="1"
+            class="w-16 text-center border rounded-lg py-1 font-semibold"
+        >
+
+        <!-- Plus -->
+        <button 
+            onclick="changeQty(1)" 
+            class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 text-xl font-bold">
+            +
+        </button>
+
+    </div>
+
+    <!-- Stock Info -->
+    {% if offer.coupons_remaining %}
+    <p class="text-xs text-orange-500 mt-2">
+        {{ offer.coupons_remaining }} items available
+    </p>
+    {% endif %}
+
+</div>
+<!-- Interactive Coupon -->
+<div class="w-full md:w-auto ">
+<form method="POST" action="{% url 'coupon_gen' offer.id %}">
+{% csrf_token %}
+<input type="hidden" name="quantity" id="hiddenQty" value="1">
+<div class="relative group cursor-pointer">
+<button type="submit" class="w-full">
+<div class="bg-primary-container text-white px-8 py-4 rounded-xl font-bold flex flex-col items-center justify-center border-2 border-dashed border-primary-fixed-dim/40 overflow-hidden">
+<span class="text-xs uppercase tracking-tighter opacity-70">Tap to reveal code</span>
+<span class="text-lg font-black mt-1">***********</span>
+<!-- Scratch overlay simulation -->
+<div class="absolute rounded-xl inset-0 bg-gradient-to-r from-sky-700 to-sky-900 flex items-center justify-center transition-transform duration-500 translate-x-0 group-hover:translate-x-full">
+<span class="material-symbols-outlined mr-2">redeem</span>
+<span class="font-bold">Claim Offer</span>
+</div>
+</div>
+</button>
+</div>
+</form>
+</div>
+{% endif %}
+</div>
+<!-- Details Tab -->
+<!-- Reviews Section -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-bold text-primary">Customer Reviews</h2>
+</div>
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col items-center justify-center border border-outline-variant/30">
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-center">
+<span class="text-6xl font-black text-primary leading-none">{{ offer.shop.rating }}</span>
+<div class="flex text-on-tertiary-container mt-3">
+{% for star in stars %}
+{% if star == "full" %}
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star</span>
+{% elif star == "half" %}
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star_half</span>
+{% else %}
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">star_outline</span>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+<div class="h-16 w-px bg-outline-variant/50 hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="
+    text-lg font-bold  
+    {% if offer.shop.rating >= 4 %} text-green-600  
+    {% elif offer.shop.rating >= 3 %} text-yellow-500  
+    {% else %} text-red-500  
+    {% endif %}
+">
+    {{ offer.shop.recommendation_label }}
+</span>
+<span class="text-sm text-outline">Based on {{ offer.shop.total_reviews }} verified reviews</span>
+</div>
+</div>
+</div>
+<form method="POST" action="{% url 'add_review' offer.id %}">
+{% csrf_token %}
+
+<div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm">
+    
+    <h3 class="text-lg font-bold text-primary mb-4">Share your experience</h3>
+
+    <!-- Hidden rating -->
+    <input type="hidden" name="rating" id="ratingInput" value="{{ old_rating }}">
+
+    <div class="space-y-4">
+
+        <!-- ⭐ Rating -->
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-sm font-medium">Your Rating:</span>
+
+            <div id="starContainer" class="flex text-gray-400 cursor-pointer">
+                <span class="material-symbols-outlined star" data-value="1">star</span>
+                <span class="material-symbols-outlined star" data-value="2">star</span>
+                <span class="material-symbols-outlined star" data-value="3">star</span>
+                <span class="material-symbols-outlined star" data-value="4">star</span>
+                <span class="material-symbols-outlined star" data-value="5">star</span>
+            </div>
+        </div>
+
+        <!-- Review -->
+        <textarea 
+            name="review"
+            class="w-full border rounded-xl p-4 text-sm min-h-[100px]"
+            placeholder="Tell others about the product...">{{ old_review }}
+        </textarea>
+        
+        {% if error %}
+        <div class="bg-red-100 text-red-700 px-4 py-2 rounded-lg mb-3 text-sm">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- Button -->
+        <button type="submit"
+            class="bg-gradient-to-r from-sky-700 to-sky-900 text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:shadow-md">
+            Post Review
+        </button>
+
+    </div>
+</div>
+
+</form>
+<!-- Review List -->
+<div class="divide-y divide-outline-variant">
+{% for review in reviews %}
+<div class="py-6 space-y-2 review-item {% if forloop.counter > 4 %}hidden{% endif %}">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a male customer in casual attire against a soft natural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1XYc4De7rAkrIOXM26Ot7Y2RH_OEzlfdX2G7B9Z-I6M3jATS15iz2f39QoHejlDlQrMwJMNZmrfkrltVV1j0eQNbaDdm0K3OAeSzLC_dHJTXxYGJcv5P2Gi046vHlVdeNaWSHrorMO_Lg94ZglsfhdmzK9bjLbb53aNjDXLr46xVf_xAaBeuN7liGiu6Gle1PlKYwcoeF2It4azL1tDFtJW25ACcgiXYUuxAvYtRnKbC-ZwdHUh8t7tZrxeRKDAV01BiziJiYUO8"/>
+<div>
+<p class="font-bold text-sm">{{ review.user.username }}</p>
+<p class="text-xs text-outline">{{ review.created_at|timesince }} ago</p>
+</div>
+</div>
+<div class="flex text-on-tertiary-container">
+{% for i in "12345" %}
+                {% if forloop.counter <= review.rating %}
+                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+                {% else %}
+                    <span class="material-symbols-outlined text-xs">star</span>
+                {% endif %}
+{% endfor %}
+</div>
+</div>
+<p class="text-on-surface-variant text-sm">{{ review.comment }}</p>
+</div>
+{% endfor %}
+<div class="text-center mt-4">
+    <button id="toggleReviewsBtn"
+        class="text-primary font-semibold text-sm hover:underline">
+        See All Reviews
+    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Side: Shop Details & Map -->
+<aside class="w-full lg:w-[380px] space-y-6 lg:mt-6">
+<!-- Shop Card -->
+<div class="bg-white rounded-2xl shadow-sm border border-outline-variant overflow-hidden sticky top-24">
+<div class="p-6 space-y-6">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center text-sky-900 border border-sky-200">
+<span class="material-symbols-outlined text-3xl">storefront</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-primary leading-tight">{{ offer.shop.shop_name }}</h3>
+<div class="flex items-center gap-1.5 mt-1">
+{% if offer.shop.is_verified %}
+<span class="bg-green-100 text-green-700 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                        VERIFIED SHOP
+                                    </span>
+{% endif %}
+{% if offer.shop.is_open_now %}
+        <span class="text-green-600 text-xs font-semibold ">
+              OPEN NOW
+        </span>
+    {% else %}
+        <span class="text-red-400 text-xs font-semibold ">
+            CLOSED
+        </span>
+    {% endif %}
+</div>
+</div>
+</div>
+</div>
+<!-- Map Integration -->
+<div class="rounded-xl overflow-hidden h-40 relative group">
+<div class="absolute inset-0 bg-slate-200 animate-pulse"></div>
+<img alt="Map of Downtown area" class="absolute inset-0 w-full h-full object-cover" data-location="New York City" src="https://i.pinimg.com/1200x/00/b5/8d/00b58d56ee4d422b4698e46a137debf9.jpg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-primary text-white px-3 py-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2">
+<button class="bg-white/90 backdrop-blur-sm text-[10px] font-bold px-2 py-1 rounded shadow-sm border border-outline-variant text-primary">EXPAND MAP</button>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline">location_on</span>
+<div>
+<p class="text-sm font-medium">{{ offer.shop.city }}, {{ offer.shop.district }},{{ offer.shop.state }}</p>
+<p class="text-xs text-outline">0.4 miles away • 12 mins walking</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline">schedule</span>
+<div>
+<p class="text-sm font-medium">
+{{ offer.shop.opening_time|time:"h:i A" }} - {{ offer.shop.closing_time|time:"h:i A" }}
+</p>
+<p class="text-xs text-outline">Closes in 3 hours</p>
+</div>
+</div>
+</div>
+
+<div class="pt-4 border-t border-outline-variant flex gap-3">
+<a 
+href="https://www.google.com/maps/search/?api=1&query={{ shop.shop_name }} {{ shop.city }}"
+target="_blank"
+class="flex-1">
+
+    <button class="w-full bg-gradient-to-r from-sky-700 to-sky-900 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2  active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-lg">directions</span>
+        Navigate
+    </button>
+
+</a>
+<!-- <button class="flex-1 bg-gradient-to-r from-sky-700 to-sky-900 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg">directions</span>
+                            Navigate
+                        </button> -->
+<!-- <button class="p-3 bg-secondary-container text-primary rounded-xl active:scale-95 transition-all">
+<span class="material-symbols-outlined">call</span>
+</button> -->
+</div>
+</div>
+<!-- Related Deals in Sidebar -->
+<div class="bg-surface-container-low p-6 space-y-4">
+<div class="mt-6">
+
+    <h3 class="text-sm font-bold text-slate-700 mb-4">
+        OTHER DEALS FROM THIS SHOP
+    </h3>
+    {% if other_offers %}
+    <div class="space-y-4">
+
+        {% for item in other_offers %}
+        <a href="{% url 'offer_details' item.id %}" class="flex items-center gap-3 group">
+
+            <!-- Image -->
+            <img 
+                src="{{ item.image.url }}" 
+                class="w-14 h-14 rounded-lg object-cover"
+            >
+
+            <!-- Content -->
+            <div class="flex-1">
+
+                <p class="text-sm font-semibold text-slate-800 group-hover:text-primary transition">
+                    {{ item.title }}
+                </p>
+
+                <p class="text-xs text-gray-500">
+                    {{ item.discount_percentage|floatformat:0 }}% Off
+                </p>
+
+                <p class="text-sm font-bold text-slate-900">
+                    ₹{{ item.discount_price }}
+                </p>
+
+            </div>
+
+        </a>
+        {% endfor %}
+
+    </div>
+
+    <!-- View Shop -->
+    <div class="mt-4 text-center">
+        <a href="{% url 'shop_detail' shop.id %}" 
+           class="text-sm text-primary font-semibold hover:underline">
+            View Shop Profile
+        </a>
+    </div>
+
+</div>
+{% else %}
+<p class="text-xs text-gray-400">No other offers available</p>
+{% endif %}
+</aside>
+</div>
+<!-- Related Deals Horizontal Scroll -->
+{% if related_offers %}
+<section class="bg-white border-t border-outline-variant py-12 mb-20">
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-2xl font-black text-primary mb-8">
+    Similar Deals from Other Shops
+</h2>
+
+<div class="flex gap-6 overflow-x-auto hide-scrollbar pb-6">
+
+{% for offer in related_offers %}
+<div class="min-w-[280px] max-w-[280px] group cursor-pointer">
+
+    <div class="relative aspect-square rounded-2xl overflow-hidden mb-3">
+        <img class="w-full h-full object-cover"
+             src="{{ offer.image.url }}" />
+    </div>
+
+    <p class="font-bold text-sm text-primary">
+        {{ offer.title|truncatechars:30 }}
+    </p>
+
+    <div class="flex justify-between mt-1">
+        <p class="text-xs text-outline">
+            {{ offer.shop.shop_name|truncatechars:15 }}
+        </p>
+
+        <p class="font-black text-primary">
+            ₹{{ offer.discount_price }}
+        </p>
+    </div>
+
+</div>
+{% endfor %}
+
+</div>
+</div>
+</section>
+{% endif %}
+<!-- Mobile Sticky CTA -->
+<!-- <div class="fixed bottom-0 left-0 w-full bg-white border-t border-outline-variant p-4 flex gap-4 lg:hidden z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col justify-center">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider leading-none">Price</p>
+<p class="text-lg font-black text-primary leading-none">₹{{ offer.discount_price|floatformat:2 }}</p>
+</div>
+<button class="flex-1 bg-primary text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+            Get Offer Code
+        </button>
+</div> -->
+
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden" id="profile-overlay" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); this.classList.add('hidden');" style="background-image: url('{{ profile.profile_image.url }}');"></div>
+<div class="fixed right-0 top-0 h-full w-[340px] bg-white dark:bg-slate-900 z-[70] shadow-2xl transition-transform duration-300 translate-x-full flex flex-col" id="profile-panel">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold dark:text-white">Profile</h2>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); document.getElementById('profile-overlay').classList.add('hidden');">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl mb-8">
+<div class="h-14 w-14 rounded-full bg-slate-200 bg-cover bg-center" style="background-image: url('{{ profile.profile_image.url }}');"></div>
+<div>
+<h3 class="font-bold dark:text-white">{{ request.user|truncatechars:12 }}</h3>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 text-primary font-semibold" href="">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'savedoffers' %}">
+<span class="material-symbols-outlined">favorite</span> Saved Offers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'active_coupons' %}">
+<span class="material-symbols-outlined">local_activity</span> Active Coupons
+            </a>
+<div class="pt-4 pb-2">
+<span class="px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Settings</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'customerprofile' %}">
+<span class="material-symbols-outlined">person</span> Profile
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">notifications</span> Notifications
+            </a>
+</nav>
+<a href="{% url 'logout' %}">
+<button class="mt-auto flex items-center justify-center gap-2 w-full p-4 border border-slate-200 dark:border-slate-700 rounded-xl font-bold text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">logout</span> Logout
+        </button></a>
+</div>
+</div>
+<script>
+function changeQty(value) {
+    const input = document.getElementById("quantity");
+    let current = parseInt(input.value);
+
+    current += value;
+
+    if (current < 1) current = 1;
+
+    // Optional: limit max to available coupons
+    const max = Number("{{ offer.coupons_remaining|default:'100' }}");
+    if (current > max) current = max;
+
+    input.value = current;
+}
+</script>
+<script>
+const stars = document.querySelectorAll(".star");
+const ratingInput = document.getElementById("ratingInput");
+
+// restore old rating
+const initialRating = ratingInput.value;
+
+if (initialRating) {
+    stars.forEach(s => {
+        if (s.getAttribute("data-value") <= initialRating) {
+            s.classList.add("text-yellow-500");
+        }
+    });
+}
+
+stars.forEach(star => {
+    star.addEventListener("click", function () {
+        const value = this.getAttribute("data-value");
+        ratingInput.value = value;
+
+        stars.forEach(s => {
+            if (s.getAttribute("data-value") <= value) {
+                s.classList.add("text-yellow-500");
+            } else {
+                s.classList.remove("text-yellow-500");
+            }
+        });
+    });
+});
+</script>
+<script>
+const btn = document.getElementById("toggleReviewsBtn");
+const hiddenReviews = document.querySelectorAll(".review-item.hidden");
+
+let expanded = false;
+
+btn.addEventListener("click", () => {
+    expanded = !expanded;
+
+    hiddenReviews.forEach(el => {
+        el.style.display = expanded ? "block" : "none";
+    });
+
+    btn.innerText = expanded ? "Show Less" : "See All Reviews";
+});
+</script>
+<script>
+function toggleSave(offerId) {
+    fetch(`/customer/togglesave/${offerId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const heart = document.getElementById("heartIcon");
+
+        if (data.saved) {
+            heart.style.color = "red";
+            heart.style.fontVariationSettings = "'FILL' 1";
+        } else {
+            heart.style.color = "white";
+            heart.style.fontVariationSettings = "'FILL' 0";
+        }
+    });
+}
+</script>
+</body></html>
+<!-- SideNavBar (Shared Component - Hidden on mobile/tablet) -->
+<!-- <aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full z-40 h-screen w-64 border-r border-slate-200 bg-white divide-y divide-slate-100 shadow-xl font-inter text-sm font-medium">
+<div class="p-6">
+<span class="text-xl font-bold text-sky-900 block">NearKart</span>
+<p class="text-xs text-slate-500 mt-1">Local Deals, Instant Savings</p>
+</div>
+<nav class="flex-1 py-4 overflow-y-auto">
+<a class="flex items-center gap-3 px-6 py-3 bg-sky-50 text-sky-700 border-r-4 border-sky-700 hover:pl-2 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">explore</span> Explore
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-600 hover:bg-slate-50 hover:pl-2 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">military_tech</span> My Rewards
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-600 hover:bg-slate-50 hover:pl-2 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">bookmark</span> Saved Offers
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-600 hover:bg-slate-50 hover:pl-2 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">history</span> Shop History
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-600 hover:bg-slate-50 hover:pl-2 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="p-6">
+<button class="w-full bg-primary-container text-white py-2.5 rounded-lg font-bold text-xs focus:ring-2 focus:ring-sky-500 active:scale-95 transition-all">
+                Refer a Friend
+            </button>
+</div>
+</aside> -->

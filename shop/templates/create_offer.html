@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Offer | NearKart Vendor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a3d61",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .form-input:focus { border-color: #0a3d61; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Sticky Top Navbar -->
+<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex h-16 items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined block">local_mall</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">NearKart <span class="text-slate-500 font-medium">Vendor</span></h1>
+</div>
+<div class="flex items-center gap-4">
+<a class="flex items-center gap-1 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 transition-colors" href="{% url 'vendordash' %}">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+    Back to Dashboard
+</a></div>
+</div>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-4 py-12">
+<div class="mb-10 text-center">
+<h2 class="text-4xl font-black text-slate-900 dark:text-white mb-2">Create New Offer</h2>
+<p class="text-slate-500 dark:text-slate-400">Launch a new promotion to reach customers in your area.</p>
+</div>
+<form class="space-y-8" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<!-- 1. Basic Offer Information -->
+<section class="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">info</span>
+<h3 class="text-xl font-bold">Basic Offer Information</h3>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Offer Title</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">label</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none transition-all" name="title" placeholder="e.g. 50% Off Weekend Sale" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Description</label>
+<textarea class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none" name="description" placeholder="Describe the details of your amazing offer..." rows="3"></textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Category</label>
+<select class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none transition-all" name="category">
+<option value="groceries">Groceries</option>
+<option value="electronics">Electronics</option>
+<option value="fashion">Fashion</option>
+<option value="beauty">Beauty &amp; Wellness</option>
+<option value="home">Home &amp; Living</option>
+</select>
+</div>
+</div>
+<div>
+<label for="imageInput"
+    class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer group block">
+
+        <!-- Default Content -->
+        <div id="imageContent">
+            <span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-primary mb-3">
+                add_photo_alternate
+            </span>
+            <p class="text-sm font-medium text-slate-600 dark:text-slate-400">
+                Upload Offer Image
+            </p>
+            <p class="text-[11px] text-slate-400 mt-1">
+                Up to 5 images
+            </p>
+        </div>
+
+        <!-- Preview Container -->
+        <div id="imagePreviewContainer"
+        class="hidden mt-4 flex justify-center">
+
+            <div class="relative">
+
+                <img id="imagePreview"
+                class="w-24 h-24 object-cover rounded-lg shadow-md border">
+
+                <!-- Remove Button -->
+                <button type="button" id="imageRemove"
+                class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-500">
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+    </label>
+<input type="file" name="image" id="imageInput" class="hidden" accept="image/*">
+</div>
+</div>
+</section>
+<!-- 2. Pricing & Discount -->
+<section class="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">sell</span>
+<h3 class="text-xl font-bold">Pricing &amp; Discount</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Original Price</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">₹</span>
+<input class="w-full pl-8 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="original_price" placeholder="0.00" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Discount Price</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">₹</span>
+<input class="w-full pl-8 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="discount_price" placeholder="0.00" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Discount %</label>
+<div class="relative">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">%</span>
+<input class="w-full pl-4 pr-8 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="discount_percentage" placeholder="0" type="number"/>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Offer Duration -->
+<section class="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<h3 class="text-xl font-bold">Offer Duration</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Start Date &amp; Time</label>
+<input class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="start_date" type="datetime-local"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">End Date &amp; Time</label>
+<input class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="end_date" type="datetime-local"/>
+</div>
+</div>
+</section>
+<!-- 4. Coupon Settings -->
+<section class="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">confirmation_number</span>
+<h3 class="text-xl font-bold">Coupon Settings</h3>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" name="is_coupon_based" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+<span class="ml-3 text-sm font-medium text-slate-700 dark:text-slate-300">Enable Coupons</span>
+</label>
+</div>
+<div class="mt-4">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Total Coupons Available</label>
+<input class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="total_coupons" placeholder="Unlimited" type="number"/>
+</div>
+</section>
+<!-- 5. Targeting & Visibility -->
+<section class="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">near_me</span>
+<h3 class="text-xl font-bold">Targeting &amp; Visibility</h3>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Target City</label>
+<input class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="target_city" placeholder="e.g. San Francisco" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Target Radius (KM)</label>
+<input class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/20 outline-none" name="target_radius_km" placeholder="5" type="number"/>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 rounded-xl bg-primary/5 border border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">notifications_active</span>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Push Notifications</p>
+<p class="text-xs text-slate-500">Notify users within your target radius</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" name="notify_users" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- 6. Offer Status -->
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-500">check_circle</span>
+<h3 class="text-lg font-bold">Set Offer as Active</h3>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" name="notify_users" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+<!-- CTA Button -->
+<div class="flex flex-col items-center pt-8">
+<button class="w-full max-w-md py-4 px-8 rounded-full bg-gradient-to-r from-primary to-[#1e5a8a] text-white font-bold text-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3" type="submit">
+<span class="material-symbols-outlined">rocket_launch</span>
+                    Create Offer
+                </button>
+<p class="mt-4 text-sm text-slate-500 text-center">Your offer will be reviewed and published instantly.</p>
+</div>
+</form>
+</main>
+<footer class="max-w-7xl mx-auto px-4 py-12 text-center text-slate-400 text-sm">
+<p>© 2024 NearKart Vendor. All rights reserved.</p>
+</footer>
+<script>
+const input = document.getElementById("imageInput");
+const preview = document.getElementById("imagePreview");
+const previewContainer = document.getElementById("imagePreviewContainer");
+const removeBtn = document.getElementById("imageRemove");
+const content = document.getElementById("imageContent");
+
+// When image selected
+input.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+
+        // Show preview box
+        previewContainer.classList.remove("hidden");
+
+        // Hide default content
+        content.classList.add("hidden");
+    }
+});
+
+// When remove button clicked
+removeBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    // Clear input
+    input.value = "";
+
+    // Hide preview
+    previewContainer.classList.add("hidden");
+
+    // Show original UI
+    content.classList.remove("hidden");
+
+    // Clear preview image
+    preview.src = "";
+});
+</script>
+</body></html>

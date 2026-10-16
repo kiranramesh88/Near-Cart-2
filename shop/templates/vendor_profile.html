@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Complete Profile | NearKart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#1a1c1e",
+            "on-tertiary-fixed": "#2c1600",
+            "on-primary-fixed": "#001d33",
+            "primary-container": "#0a3d61",
+            "on-primary": "#ffffff",
+            "surface-dim": "#dadadd",
+            "on-secondary-container": "#566474",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed-dim": "#f8ba7e",
+            "surface-container-highest": "#e2e2e5",
+            "outline-variant": "#c2c7cf",
+            "tertiary-fixed": "#ffdcbe",
+            "surface-container": "#eeedf1",
+            "on-secondary-fixed-variant": "#3a4858",
+            "on-tertiary-fixed-variant": "#673d0b",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#d2995f",
+            "primary-fixed": "#cfe5ff",
+            "secondary-container": "#d3e1f4",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f4f3f6",
+            "surface-bright": "#f9f9fc",
+            "primary": "#002742",
+            "on-primary-fixed-variant": "#1d4a6e",
+            "primary-fixed-dim": "#a2caf6",
+            "on-surface": "#1a1c1e",
+            "surface-variant": "#e2e2e5",
+            "on-secondary-fixed": "#0e1d2b",
+            "on-error": "#ffffff",
+            "tertiary-container": "#583100",
+            "secondary-fixed-dim": "#b9c8db",
+            "on-surface-variant": "#42474e",
+            "on-primary-container": "#80a8d2",
+            "inverse-primary": "#a2caf6",
+            "outline": "#72777f",
+            "surface": "#f9f9fc",
+            "surface-tint": "#386287",
+            "secondary-fixed": "#d5e4f7",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-low font-body text-on-surface antialiased">
+<!-- Top Navigation (Shared Component) -->
+<nav class="fixed top-0 w-full z-40 border-b border-slate-200 bg-white shadow-sm flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold text-cyan-900 tracking-tight">NearKart</span>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg text-sm font-medium" href="#">Dashboard</a>
+<a class="text-slate-500 hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg text-sm font-medium" href="#">Explore</a>
+<a class="text-cyan-700 border-b-2 border-cyan-700 px-3 py-2 text-sm font-medium" href="#">Complete Profile</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="Vendor Profile" class="w-full h-full object-cover" data-alt="professional headshot of a smiling young businessman in a clean studio setting with soft lighting" src=""/>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-12 px-4 md:px-6">
+<div class="max-w-[900px] mx-auto">
+<!-- Stepper Progress Header -->
+<div class="mb-10 text-center">
+<h1 class="text-3xl font-extrabold text-primary mb-2 tracking-tight">Complete Your Profile</h1>
+<p class="text-on-surface-variant mb-8">Personalize your NearKart experience to unlock all features.</p>
+<div class="relative w-full bg-surface-container-highest h-3 rounded-full overflow-hidden mb-8">
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary-container to-surface-tint w-[60%] transition-all duration-700"></div>
+</div>
+<div class="flex justify-between items-start max-w-3xl mx-auto px-2">
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold shadow-md">1</div>
+<span class="text-xs font-semibold text-primary">Identity</span>
+</div>
+<div class="flex-1 h-px bg-primary-container mt-5 mx-2"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold shadow-md">2</div>
+<span class="text-xs font-semibold text-primary">Location</span>
+</div>
+<div class="flex-1 h-px bg-outline mt-5 mx-2 opacity-30"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold border-2 border-outline-variant">3</div>
+<span class="text-xs font-medium text-on-surface-variant">Business</span>
+</div>
+<div class="flex-1 h-px bg-outline mt-5 mx-2 opacity-30"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold border-2 border-outline-variant">4</div>
+<span class="text-xs font-medium text-on-surface-variant">Verify</span>
+</div>
+</div>
+</div>
+<!-- Main Form Container -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="grid grid-cols-1 gap-8">
+<!-- Section 1: Basic Info -->
+<section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<h2 class="text-xl font-bold text-primary">Basic Information</h2>
+</div>
+<div class="flex flex-col md:flex-row gap-10">
+<div class="flex flex-col items-center gap-4">
+<div class="relative w-32 h-32">
+
+    <!-- Hidden file input -->
+    <input type="file" name="profile_image" id="profileInput" class="hidden">
+
+    <!-- Clickable image -->
+    <label for="profileInput" class="cursor-pointer block w-full h-full">
+        <img src="{% if profile.profile_image %}{{ profile.profile_image.url }}{% endif %}"
+             class="w-full h-full object-cover rounded-full border-4 border-gray-200">
+    </label>
+
+    <!-- Camera icon -->
+    <label for="profileInput"
+           class="absolute bottom-1 right-1 bg-primary text-white p-2 rounded-full cursor-pointer shadow-lg">
+        <span class="material-symbols-outlined text-sm">photo_camera</span>
+    </label>
+
+</div>
+<p class="text-xs text-on-surface-variant font-medium">Upload profile photo</p>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Full Name</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" name="full_name"
+       value="{{ user.first_name }}"
+       placeholder="Enter your name"
+       type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Phone Number</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">+91 </span>
+<input class="w-full pl-12 pr-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" name="phone"
+       value="{{ user.phone }}"
+       type="text"/>
+</div>
+</div>
+<!-- <div class="md:col-span-2 space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Email Address</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" placeholder="alex.johnson@example.com" type="email"/>
+</div> -->
+</div>
+</div>
+</section>
+<!-- Section 2: Location -->
+<section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-secondary-fixed rounded-lg text-secondary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<h2 class="text-xl font-bold text-primary">Location Details</h2>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary-fixed rounded-xl transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="my_location">my_location</span>
+              Use Current Location
+            </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-3 space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Full Address</label>
+<textarea class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright resize-none" placeholder="Street name, building number, floor..." rows="3" name="address">{{ profile.address }}</textarea>
+</div>
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">City</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" name="city"
+       value="{{ profile.city }}"
+       type="text"/>
+</div>
+<!-- <div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">State</label>
+<select class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright">
+<option>Maharashtra</option>
+<option>Delhi</option>
+<option>Karnataka</option>
+<option>Tamil Nadu</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Pincode</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" placeholder="400001" type="text"/>
+</div> -->
+</div>
+</section>
+<!-- Section 3: Role-Based (Vendor Context Shown) -->
+<section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 bg-tertiary-fixed rounded-lg text-tertiary">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+</div>
+<div class="flex-1">
+<h2 class="text-xl font-bold text-primary">Business Profile</h2>
+<p class="text-xs text-on-surface-variant">Tell us more about your store</p>
+</div>
+<!-- <div class="flex items-center gap-1 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/30">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Vendor Active</span>
+</div> -->
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Business Name</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" name="business_name"
+       value="{{ profile.business_name }}"
+       type="text"/>
+</div>
+<!-- <div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Shop Name</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" placeholder="NearKart Express Mart" type="text"/>
+</div> -->
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">GST Number</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright" name="gst_number"
+       value="{{ profile.gst_number }}"
+       type="text"/>
+</div>
+<!-- <div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Store Category</label>
+<select class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright">
+<option>Grocery &amp; Staples</option>
+<option>Electronics</option>
+<option>Fashion &amp; Apparel</option>
+<option>Home Decor</option>
+</select>
+</div> -->
+</div>
+</section>
+<!-- Section 4: Bio & Toggles -->
+<!-- <section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<h2 class="text-xl font-bold text-primary">Personalize</h2>
+</div>
+<div class="space-y-8">
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-on-surface-variant ml-1">Bio</label>
+<textarea class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all text-on-surface bg-surface-bright resize-none" placeholder="Briefly describe your business or interests..." rows="4"></textarea>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-bright rounded-xl border border-outline-variant/30">
+<div class="flex gap-4 items-center">
+<div class="p-2 bg-white rounded-lg border border-outline-variant/20 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Real-time Notifications</h3>
+<p class="text-xs text-on-surface-variant">Get alerts for new orders and stock updates</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</section> -->
+<!-- Section 5: Verification -->
+<section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 bg-error-container rounded-lg text-error">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<h2 class="text-xl font-bold text-primary">Trust &amp; Verification</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Phone Verification -->
+<!-- <div class="flex items-center justify-between p-6 bg-surface-container-low rounded-xl border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Phone Number</h4>
+<p class="text-[10px] text-green-600 font-bold uppercase tracking-widest">Verified</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-on-surface-variant">+91 ••••• ••210</span>
+</div> -->
+<!-- Email Verification -->
+<!-- <div class="flex items-center justify-between p-6 bg-surface-container-low rounded-xl border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Email Address</h4>
+<p class="text-[10px] text-error font-bold uppercase tracking-widest">Unverified</p>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary-container text-on-primary text-xs font-bold rounded-lg hover:brightness-110 transition-all">Verify Now</button>
+</div> -->
+</div>
+</section>
+<!-- Footer Actions -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
+<!-- <a class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+            Skip for Now
+          </a> -->
+<div class="flex gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-12 py-4 bg-gradient-to-r from-primary-container to-surface-tint text-on-primary rounded-xl font-bold shadow-lg shadow-primary-container/20 hover:scale-[1.02] active:scale-95 transition-all text-base" type="submit">
+               Save &amp; Continue
+             </button>
+</div>
+</div>
+</div>
+</form>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only Shell) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 z-40 flex items-center justify-around h-16 px-4">
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="local_offer">local_offer</span>
+<span class="text-[10px] font-medium">Offers</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-cyan-700">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</div>
+</div>
+<script>
+document.getElementById("profileInput").addEventListener("change", function(e){
+    const file = e.target.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(){
+            document.querySelector("#profileInput + label img").src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+</body></html>

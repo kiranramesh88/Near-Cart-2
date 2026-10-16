@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shop Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#a2caf6",
+              "on-error": "#ffffff",
+              "error": "#ef4444",
+              "on-primary-container": "#0a3d61",
+              "on-secondary-fixed-variant": "#9a3412",
+              "on-secondary-container": "#c2410c",
+              "on-error-container": "#b91c1c",
+              "inverse-surface": "#111a21",
+              "background": "#f8fafc",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#fff7ed",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed-dim": "#c7d2fe",
+              "surface-dim": "#f1f1f1",
+              "surface-container-low": "#f8fafc",
+              "surface-container": "#f1f5f9",
+              "on-secondary-fixed": "#431407",
+              "on-tertiary": "#ffffff",
+              "tertiary": "#4f46e5",
+              "on-tertiary-container": "#4338ca",
+              "tertiary-container": "#eef2ff",
+              "on-background": "#0f172a",
+              "inverse-on-surface": "#f8fafc",
+              "secondary-fixed": "#ffedd5",
+              "surface-tint": "#0a3d61",
+              "primary-container": "#0a3d611a",
+              "outline-variant": "#cbd5e1",
+              "on-tertiary-fixed": "#312e81",
+              "on-primary-fixed": "#001d33",
+              "on-primary": "#ffffff",
+              "on-surface": "#0f172a",
+              "primary": "#0a3d61",
+              "on-surface-variant": "#64748b",
+              "surface-variant": "#f1f5f9",
+              "surface": "#ffffff",
+              "surface-bright": "#ffffff",
+              "error-container": "#fee2e2",
+              "primary-fixed-dim": "#a2caf6",
+              "primary-fixed": "#cfe5ff",
+              "secondary-fixed-dim": "#fed7aa",
+              "secondary": "#ff6b00",
+              "surface-container-highest": "#cbd5e1",
+              "tertiary-fixed": "#e0e7ff",
+              "on-tertiary-fixed-variant": "#3730a3",
+              "outline": "#e2e8f0",
+              "surface-container-high": "#e2e8f0",
+              "on-primary-fixed-variant": "#1d4a6e"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .ember-glow {
+        box-shadow: 0 10px 15px -3px rgba(255, 107, 0, 0.3);
+      }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-30 flex items-center justify-between border-b border-border-color bg-background-light px-6 py-4 shadow-subtle lg:px-10">
+<div class="flex items-center gap-8">
+<div class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined block">local_mall</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">NearCart</h1>
+ <!-- <span class="text-slate-500 font-medium">Vendor</span> -->
+</div>
+<nav class="hidden md:flex items-center gap-8">
+
+<a href="{% url 'myoffers' %}"
+   class="{% if request.resolver_match.url_name == 'myoffers' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Offers
+</a>
+
+<a href="{% url 'vendorreview' %}"
+   class="{% if request.resolver_match.url_name == 'vendorreview' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Reviews
+</a>
+
+<a href="{% url 'verifyshop' %}"
+   class="{% if request.resolver_match.url_name == 'verifyshop' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Verification
+</a>
+
+<a href="{% url 'vendordash' %}"
+   class="{% if request.resolver_match.url_name == 'vendordash' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Dashboard
+</a>
+<a href="{% url 'redeem_coupon' %}"
+   class="{% if request.resolver_match.url_name == 'redeem_coupon' %}
+           text-primary font-semibold border-b-2 border-accent pb-1
+          {% else %}
+           text-text-muted hover:text-primary font-medium
+          {% endif %} text-sm transition-colors">
+    Coupon Redemption
+</a>
+
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-l border-border-color pl-6">
+<button class="relative text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<!-- <button class="text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button> -->
+<div onclick="togglePanel()" class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm ring-1 ring-border-color" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsmytuvGbv2K9-xGpXosy3H3GWNAiKKldSBFvTNIpizOPlnm54x1brPUwWeP2QatbmREWxvMmuv5-dcNWsjx5Ud70ETACwJDxntFSatpWxhdvXD147pgYc5D-aWZadnetNjQtyChizGFrvFRE7j_NGfaJ3_gewM3TxSc4iFXsov8h0D5LKB0fnPcrVoYd0L23nf-e7fbOatV306Tw6tgbQNrLyKtCkR0HkrxnX9AVDsCyT5JuWsChNXCmOGTYOZBoxbxfH7y-chK0')"></div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+{% if not shop.is_verified %}
+<main class="flex-grow flex items-center justify-center p-6 md:p-12">
+<div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Verification Card -->
+<div class="md:col-span-7 bg-surface rounded-xl shadow-sm border border-outline p-8 md:p-10">
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-on-primary-container font-headline tracking-tight mb-2">Verify Your Shop</h1>
+<p class="text-on-surface-variant leading-relaxed text-sm">Get verified to increase trust and visibility of your offers across the maritime marketplace.</p>
+</div>
+<!-- Status Banner -->
+<div class="bg-error-container/50 border border-error/20 rounded-lg p-4 mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-error">info</span>
+<span class="text-on-error-container font-medium text-sm">Your shop is not verified yet</span>
+</div>
+<!-- Form Section -->
+ <form action="" method="post">
+{% csrf_token %}
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface uppercase tracking-wider" for="license">License Number</label>
+<div class="relative">
+<input name="license_number" class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary rounded-lg px-4 py-3 text-on-surface placeholder:text-on-surface-variant/50 transition-all" id="license" placeholder="e.g., LIC-123456" type="text" style="text-transform: uppercase;"/>
+</div>
+</div>
+<button type="submit" class="w-full bg-secondary hover:bg-[#e65a00] text-white font-bold py-4 px-6 rounded-full flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-95 ember-glow">
+<span class="material-symbols-outlined" data-weight="fill">verified_user</span>
+                        Verify Now
+                    </button>
+<p class="text-sm text-on-surface-variant text-center px-4">
+                        Verification helps your shop appear higher in customer search results.
+                    </p>
+</div>
+</div>
+</form>
+<!-- Side Info & Badge Preview (Asymmetric Layout) -->
+<div class="md:col-span-5 space-y-6">
+<!-- Badge Preview Card -->
+<div class="bg-surface rounded-xl shadow-sm border border-outline p-8 text-center flex flex-col items-center justify-center min-h-[280px] relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-[0.03]"></div>
+<div class="relative z-10">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-6">Badge Preview</p>
+<div class="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center mb-4 mx-auto border-4 border-white shadow-md">
+<span class="material-symbols-outlined text-primary text-5xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h3 class="text-xl font-bold text-primary mb-1">Vendor Verified</h3>
+<p class="text-sm text-on-surface-variant">Trusted Vendor Partner</p>
+</div>
+</div>
+<!-- Trust Indicators -->
+<div class="bg-primary text-white rounded-xl p-8 shadow-sm">
+<h4 class="font-bold mb-4 text-lg">Why verify?</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span class="text-sm text-blue-50">35% higher conversion rate on average</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span class="text-sm text-blue-50">Priority listing in the marketplace</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span class="text-sm text-blue-50">Exclusive access to bulk order bidding</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+{% else %}
+<main class="flex-grow flex items-center justify-center px-4 py-12">
+<div class="w-full max-w-xl">
+<div class="bg-surface rounded-xl shadow-sm border border-outline overflow-hidden">
+<div class="h-2 bg-primary"></div>
+<div class="p-10 text-center">
+<div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-50 text-emerald-600 mb-8 ring-8 ring-emerald-50/50">
+<span class="material-symbols-outlined text-5xl" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h1 class="text-3xl font-bold text-on-surface tracking-tight mb-4">Verification Complete</h1>
+<p class="text-on-surface-variant text-sm mb-8 max-w-md mx-auto">
+            Congratulations! Your store identity and business documents have been successfully verified by the NearCart team.
+          </p>
+<div class="bg-emerald-50 border border-emerald-100 rounded-xl p-6 mb-10 inline-flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600" data-icon="check_circle">check_circle</span>
+<span class="text-emerald-800 font-semibold text-lg tracking-tight">Your shop is now verified ✔</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mb-10">
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline/50">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block mb-1">Status</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-on-surface font-semibold">Active &amp; Trusted</span>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline/50">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block mb-1">Verification Tier</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="grade">grade</span>
+<span class="text-on-surface font-semibold">Gold Merchant</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary text-white font-bold px-8 py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-sm">
+              Go to Dashboard
+            </button>
+</div>
+<!-- <div class="mt-12 pt-8 border-t border-outline flex items-center justify-center gap-8"> -->
+</div>
+</div>
+</div>
+</main>
+{% endif %}
+<!-- Footer -->
+<footer class="w-full py-12 mt-auto bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6">
+<div class="text-slate-600 dark:text-slate-400 text-sm font-normal font-['Inter']">
+                © 2026 NearCart
+            </div>
+<div class="flex gap-8">
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#ff6b00] transition-colors text-sm" href="#">Terms of Service</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#ff6b00] transition-colors text-sm" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#ff6b00] transition-colors text-sm" href="#">Support</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#ff6b00] transition-colors text-sm" href="#">Documentation</a>
+</div>
+</div>
+</footer>
+<!-- FAB (Suppressed on this Task-Focused screen per instructions, but kept in code structure if needed for other contexts) -->
+ <script>
+document.getElementById("licenseInput").addEventListener("input", function() {
+    this.value = this.value.toUpperCase();
+});
+</script>
+</body></html>

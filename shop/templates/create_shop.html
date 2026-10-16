@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NearKart - Create Your Shop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a3d61",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-size: 20px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-1.5 rounded-lg">
+<svg class="w-6 h-6" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-primary dark:text-slate-100 text-xl font-bold tracking-tight">NearKart</h2>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-full size-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-full size-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center py-10 px-6 overflow-y-auto">
+<div class="w-full max-w-3xl mx-auto">
+<div class="mb-10 text-center">
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white">Create Your Shop</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-2 text-lg">Add your store details to start listing offers on NearKart.</p>
+</div>
+<form class="space-y-8" enctype="multipart/form-data" method="post">
+{% csrf_token %}
+<!-- Basic Information Section -->
+<div class="bg-white dark:bg-background-dark/50 border border-primary/10 rounded-xl p-8 shadow-sm">
+<h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">info</span>
+                            General Information
+                        </h3>
+<div class="space-y-5">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Shop Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">store</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="Enter shop name" type="text" name="shop_name"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Description</label>
+<textarea class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="Tell customers about your shop..." rows="3" style="border-radius: 25px;" name="description"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Category</label>
+<select id="categorySelect"
+class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" name="category">
+<option value="fashion">Retail & Fashion</option>
+<option value="electronics">Electronics</option>
+<option value="grocery">Groceries</option>
+<option value="pharmacy">Services</option> <!-- optional -->
+<option value="restaurant">Restaurants</option>
+<option value="other">Other</option>
+</select>
+<div id="customCategoryWrapper" class="mt-5 hidden">
+    <input 
+        name="custom_category"
+        type="text" 
+        placeholder="Enter your custom category"
+        class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all"
+    />
+</div>
+</div>
+</div>
+</div>
+<!-- Media Section -->
+<div class="bg-white dark:bg-background-dark/50 border border-primary/10 rounded-xl p-8 shadow-sm">
+<h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">photo_library</span>
+                            Media &amp; Branding
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <label for="logoInput"
+    class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer group block">
+
+        <!-- Default Content -->
+        <div id="logoContent">
+            <span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-primary mb-3">
+                add_photo_alternate
+            </span>
+            <p class="text-sm font-medium text-slate-600 dark:text-slate-400">
+                Upload Shop Logo
+            </p>
+            <p class="text-[11px] text-slate-400 mt-1">
+                500x500px suggested
+            </p>
+        </div>
+
+        <!-- Preview Container -->
+        <div id="logoPreviewContainer"
+        class="hidden mt-4 flex justify-center">
+
+            <div class="relative">
+
+                <img id="logoPreview"
+                class="w-24 h-24 object-cover rounded-lg shadow-md border">
+
+                <!-- Remove Button -->
+                <button type="button" id="logoRemove"
+                class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-500">
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+    </label>
+<input type="file" name="logo" id="logoInput" class="hidden" accept="image/*">
+<img id="logoPreview" class="hidden mt-4 mx-auto rounded-lg w-24 h-24 object-cover">
+<label for="imageInput"
+    class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer group block">
+
+        <!-- Default Content -->
+        <div id="imageContent">
+            <span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-primary mb-3">
+                imagesmode
+            </span>
+            <p class="text-sm font-medium text-slate-600 dark:text-slate-400">
+                Shop Banner / Photos
+            </p>
+            <p class="text-[11px] text-slate-400 mt-1">
+                Up to 5 images
+            </p>
+        </div>
+
+        <!-- Preview Container -->
+        <div id="imagePreviewContainer"
+        class="hidden mt-4 flex justify-center">
+
+            <div class="relative">
+
+                <img id="imagePreview"
+                class="w-24 h-24 object-cover rounded-lg shadow-md border">
+
+                <!-- Remove Button -->
+                <button type="button" id="imageRemove"
+                class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-500">
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+    </label>
+<input type="file" name="banner" id="imageInput" class="hidden" accept="image/*">
+<img id="imagePreview" class="hidden mt-4 mx-auto rounded-lg w-24 h-24 object-cover">
+</div>
+</div>
+<!-- Location Section -->
+<div class="bg-white dark:bg-background-dark/50 border border-primary/10 rounded-xl p-8 shadow-sm">
+<h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                            Shop Location
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Full Address</label>
+<textarea class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="Street, landmark, etc." rows="2" style="border-radius: 25px;" name="address"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">City</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="City" type="text" name="city"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">District</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="District" type="text" name="district"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">State</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="State" type="text" name="state"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Pincode</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="6-digit code" type="text" name="pincode"/>
+</div>
+</div>
+</div>
+<!-- Contact & Timing Section -->
+<div class="bg-white dark:bg-background-dark/50 border border-primary/10 rounded-xl p-8 shadow-sm">
+<h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">contact_support</span>
+                            Contact &amp; Operations
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Phone Number</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="+91 XXXXX XXXXX" type="tel" name="phone"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Email (Optional)</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="shop@example.com" type="email" name="email"/>
+</div>
+<div class="md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Website / Social Link</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" placeholder="https://..." type="url" name="website"/>
+</div>
+<label class="block text-sm font-medium mb-2">Working Days</label>
+
+<div class="md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Working Days</label>
+<div class="flex flex-wrap gap-2" name="working_days">
+<label class="flex-1 min-w-[60px]">
+<input checked="" class="peer hidden" name="working_days" type="checkbox" value="mon"/>
+<div class="flex items-center justify-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all text-center">
+                Mon
+            </div>
+</label>
+<label class="flex-1 min-w-[60px]">
+<input checked="" class="peer hidden" name="working_days" type="checkbox" value="tue"/>
+<div class="flex items-center justify-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all text-center">
+                Tue
+            </div>
+</label>
+<label class="flex-1 min-w-[60px]">
+<input checked="" class="peer hidden" name="working_days" type="checkbox" value="wed"/>
+<div class="flex items-center justify-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all text-center">
+                Wed
+            </div>
+</label>
+<label class="flex-1 min-w-[60px]">
+<input checked="" class="peer hidden" name="working_days" type="checkbox" value="thu"/>
+<div class="flex items-center justify-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all text-center">
+                Thu
+            </div>
+</label>
+<label class="flex-1 min-w-[60px]">
+<input checked="" class="peer hidden" name="working_days" type="checkbox" value="fri"/>
+<div class="flex items-center justify-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all text-center">
+                Fri
+            </div>
+</label>
+<label class="flex-1 min-w-[60px]">
+<input checked="" class="peer hidden" name="working_days" type="checkbox" value="sat"/>
+<div class="flex items-center justify-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all text-center">
+                Sat
+            </div>
+</label>
+<label class="flex-1 min-w-[60px]">
+<input class="peer hidden" name="working_days" type="checkbox" value="sun"/>
+<div class="flex items-center justify-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all text-center">
+                Sun
+            </div>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Opening Time</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" type="time" name="opening_time"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Closing Time</label>
+<input class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all" type="time" name="closing_time"/>
+</div>
+</div>
+<div class="mt-8 p-6 bg-primary/5 rounded-xl border border-primary/10">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="space-y-1">
+<p class="font-semibold text-slate-900 dark:text-white">Shop Location</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">We need your location to help customers discover your store nearby.</p>
+</div>
+<button class="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-[#1a5d8c] text-white font-semibold rounded-lg shadow-md hover:shadow-primary/20 transition-all whitespace-nowrap" type="button" id="location-btn">
+<span class="material-symbols-outlined">my_location</span>
+            Detect My Location
+</button>
+<input type="hidden" id="latitude" name="latitude">
+<input type="hidden" id="longitude" name="longitude">
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-6 pb-12">
+<button class="py-5 px-6 rounded-xl bg-gradient-to-r from-primary to-[#1a5d8c] text-white font-bold text-lg shadow-lg hover:shadow-primary/30 transform hover:-translate-y-0.5 transition-all w-72 mx-auto block" type="submit">
+                            Create Shop
+                        </button>
+<p class="text-center text-slate-400 text-xs mt-5">By creating a shop, you agree to NearKart's Terms of Service and Privacy Policy.</p>
+</div>
+</form>
+</div>
+</main>
+</div>
+<script>
+
+document.getElementById("location-btn").onclick = function(){
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(function(position){
+
+            document.getElementById("latitude").value = position.coords.latitude;
+            document.getElementById("longitude").value = position.coords.longitude;
+
+            alert("Location access granted!");
+
+        }, function(){
+
+            alert("Location access denied");
+
+        });
+
+    } else {
+
+        alert("Geolocation is not supported by this browser");
+
+    }
+
+}
+
+</script>
+<script>
+function setupImageUpload(inputId, previewId, previewContainerId, removeBtnId, contentId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const previewContainer = document.getElementById(previewContainerId);
+    const removeBtn = document.getElementById(removeBtnId);
+    const content = document.getElementById(contentId);
+
+    input.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            previewContainer.classList.remove("hidden");
+            content.classList.add("hidden");
+        }
+    });
+
+    removeBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        input.value = "";
+        previewContainer.classList.add("hidden");
+        content.classList.remove("hidden");
+    });
+}
+
+// Initialize for multiple inputs
+setupImageUpload("logoInput", "logoPreview", "logoPreviewContainer", "logoRemove", "logoContent");
+
+setupImageUpload("imageInput", "imagePreview", "imagePreviewContainer", "imageRemove", "imageContent");
+</script>
+<script>
+const categorySelect = document.getElementById("categorySelect");
+const customField = document.getElementById("customCategoryWrapper");
+
+categorySelect.addEventListener("change", function () {
+    if (this.value === "Other") {
+        customField.classList.remove("hidden");
+    } else {
+        customField.classList.add("hidden");
+    }
+});
+</script>
+</body></html>

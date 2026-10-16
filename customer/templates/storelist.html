@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a3d61",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>NearKart - Nearby Stores</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-6 py-3 lg:px-10 shadow-sm">
+<div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-3 text-primary dark:text-white shrink-0">
+<div class="size-8 flex items-center justify-center bg-primary text-white rounded-lg">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">NearKart</h2>
+</div>
+<div class="hidden md:flex flex-1 max-w-xl mx-auto">
+<!-- <div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input id="searchInput" class="block w-full p-2.5 pl-10 text-sm text-slate-900 border border-slate-200 rounded-lg bg-slate-50 focus:ring-primary focus:border-primary dark:bg-slate-800 dark:border-slate-700 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary" placeholder="Search offers, stores, categories..." type="text"/>
+</div> -->
+</div>
+<div class="flex items-center gap-6 shrink-0">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-text-secondary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="{% url 'userhome' %}">Explore</a>
+<a class="text-text-primary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="{% url 'storelist' %}">Stores</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'active_coupons' %}">My Coupons</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'savedoffers' %}">Saved</a>
+</nav>
+<div class="flex gap-3">
+<div class="flex items-center gap-3 cursor-pointer group" onclick="document.getElementById('profile-panel').classList.remove('translate-x-full'); document.getElementById('profile-overlay').classList.remove('hidden');" style="background-image: url('{{ profile.profile_image.url }}');">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/10"></div>
+<div class="hidden sm:flex flex-col">
+<!-- <span class="text-sm font-bold text-slate-900 dark:text-white">{{ request.user|truncatechars:12 }}</span> -->
+<!-- <span class="text-[10px] font-medium text-primary uppercase tracking-wider">Gold Member</span> -->
+</div>
+<!-- <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">expand_more</span> -->
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto w-full px-4 md:px-20 py-8">
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100">Stores Near You</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Discover the best local shops in your neighborhood</p>
+</div>
+<!-- <div class="flex gap-3 mb-10 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-sm font-medium whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+                    All Stores
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium whitespace-nowrap hover:bg-primary/20">
+<span class="material-symbols-outlined text-sm">local_grocery_store</span>
+                    Supermarkets
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium whitespace-nowrap hover:bg-primary/20">
+<span class="material-symbols-outlined text-sm">bakery_dining</span>
+                    Bakery
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium whitespace-nowrap hover:bg-primary/20">
+<span class="material-symbols-outlined text-sm">medication</span>
+                    Pharmacy
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium whitespace-nowrap hover:bg-primary/20">
+<span class="material-symbols-outlined text-sm">pets</span>
+                    Pet Supplies
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium whitespace-nowrap hover:bg-primary/20">
+<span class="material-symbols-outlined text-sm">laundry</span>
+                    Dry Cleaning
+                </button>
+</div> -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+{% if shops %}
+{% for shop in shops %}
+<div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800" style="border-radius: 20px;">
+
+    <!-- IMAGE -->
+    <div class="relative h-48 overflow-hidden">
+        <img src="{{ shop.banner.url }}"
+             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
+        <!-- STATUS -->
+        {% if shop.is_open_now %}
+        <div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            Open Now
+        </div>
+        {% else %}
+        <div class="absolute top-3 right-3 bg-slate-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            Closed
+        </div>
+        {% endif %}
+
+        <!-- DISTANCE -->
+        <div class="absolute bottom-3 left-3 bg-black/50 text-white text-xs px-2 py-1 rounded flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs">distance</span>
+            {{ shop.distance|floatformat:1 }} km
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-5">
+        <div class="flex justify-between items-start mb-2">
+            <div>
+                <h3 class="font-bold text-lg">{{ shop.shop_name }}</h3>
+                <p class="text-sm text-slate-500">
+                    {{ shop.category|title }}
+                </p>
+            </div>
+
+            <!-- RATING -->
+            <div class="flex items-center gap-1 bg-amber-100 px-2 py-0.5 rounded text-sm font-bold">
+                {{ shop.rating|default:"4.0" }}
+                <span class="material-symbols-outlined text-sm">star</span>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="mt-4 pt-4 border-t flex items-center justify-between">
+
+            <!-- OFFERS COUNT -->
+            <span class="text-xs text-primary font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">loyalty</span>
+                {{ shop.offer_count }} Offers
+            </span>
+
+            <!-- BUTTON -->
+            <a href="{% url 'shop_detail' shop.id %}"
+               class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold">
+                View Store
+            </a>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<p class="text-center text-gray-400">No nearby stores found</p>
+{% endif %}
+<!-- <div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800">
+<div class="relative h-48 overflow-hidden">
+<img alt="Paws &amp; Whiskers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Display of colorful pet supplies and food" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpPlx9DvPfi6jV_ZKiGXKOztk-ezoW1uuijzldhQIAl0A64MamXDrpXvGOaVxmFB9KalFoTg5pJmdrpOLGQmvriAvnHwOE_wnpzdfiyudFo8tgpwYp2WrazgZLaNC_P61HIQ20ZxJX58GUfJC69lsICYijsrKjjtx7X7b8AMrWF7qjdX5JfXR2V57uDx-7abJU9BxyN-oWaWEzkMqGuMZFbJR3PGS_5Dw1c2pkq2ByE5BZcBjPFpGNxQcm1XK_NCNYixvyuxC83mI"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Open Now</div>
+<div class="absolute bottom-3 left-3 bg-black/50 backdrop-blur-md text-white text-xs px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">distance</span> 2.1 km
+                        </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Paws &amp; Whiskers</h3>
+<p class="text-sm text-slate-500">Pet Food • Toys • Grooming</p>
+</div>
+<div class="flex items-center gap-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded text-sm font-bold">
+                                4.9 <span class="material-symbols-outlined text-sm fill-1">star</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">loyalty</span> 5 Offers available
+                            </span>
+<button class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-primary/90 transition-colors">View Offers</button>
+</div>
+</div>
+</div>
+<div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800">
+<div class="relative h-48 overflow-hidden">
+<img alt="Urban Threads" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Boutique clothing store with racks of fashion apparel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW7tM370K0G1hAM3KtrtmbVi_V5qHB0QeidB0fVj3njgcZVElAQSN-ep5lHrq5afU5lVs54LWbeIAgP2YdZ5ZopdKT6_hZeWKsXjlKuGW2vboCw2jwSgPO6H_qa7MLLkv4qkGYGzYdAbgnfy0UQMsiaSmYZK_vzVyrCqnbLPUho326cO_mHvotssynFzw3ezzu9tl8gRvIWtmHMSy2PoL3Q-emSEsWGVSe2-23p7HgppoQ7cby_B2uBuFbMDtr9xku3nODwFb-p0w"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Open Now</div>
+<div class="absolute bottom-3 left-3 bg-black/50 backdrop-blur-md text-white text-xs px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">distance</span> 1.5 km
+                        </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Urban Threads</h3>
+<p class="text-sm text-slate-500">Fashion • Accessories • Boutique</p>
+</div>
+<div class="flex items-center gap-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded text-sm font-bold">
+                                4.6 <span class="material-symbols-outlined text-sm fill-1">star</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">redeem</span> Seasonal Sale
+                            </span>
+<button class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-primary/90 transition-colors">View Offers</button>
+</div>
+</div>
+</div>
+<div class="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800">
+<div class="relative h-48 overflow-hidden">
+<img alt="Gadget Hub" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0" data-alt="Modern electronics store with devices on display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqplgYX2LwpB3dhVDyUuLkYz84NUlkqwnZWDzvHtouQ0lUI1pFTU4532GZ-1ozvpWqZinV8OvUXD3cwFDpWuOc5NF_zQGH7n54slTwxwB_PYYII9PaFcZ-tLNcoS2COEVi9AzjDXEFs7W_E4PVMlVel62NtfsvQXku3uiQ5KAWG5nMa5JODpjhxZlxEEgtnPAxBODRdktS9VEBOuvBNZ8Wa4Of-lMgimQbKTCmbLzJ3ciz0og9SPIzIG_BzspUhcupfe8u34xg1Uw"/>
+<div class="absolute top-3 right-3 bg-slate-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Closed</div>
+<div class="absolute bottom-3 left-3 bg-black/50 backdrop-blur-md text-white text-xs px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">distance</span> 3.2 km
+                        </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100 opacity-75">Gadget Hub</h3>
+<p class="text-sm text-slate-500">Tech • Electronics • Repairs</p>
+</div>
+<div class="flex items-center gap-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded text-sm font-bold">
+                                4.4 <span class="material-symbols-outlined text-sm fill-1">star</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs text-slate-400 font-semibold">Opens tomorrow at 10 AM</span>
+<button class="bg-primary/20 text-primary px-5 py-2 rounded-full text-sm font-bold hover:bg-primary/30 transition-colors">View Offers</button>
+</div>
+</div>
+</div> -->
+</div>
+
+<!-- <div class="mt-12 mb-20 flex justify-center">
+<button class="flex items-center gap-2 px-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                    Load More Stores
+                    <span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+</div> -->
+</main>
+<footer class="bg-primary text-white py-12 px-4 md:px-20 mt-12">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-3xl">shopping_basket</span>
+<h2 class="text-xl font-bold">NearKart</h2>
+</div>
+<p class="text-primary/70 text-sm leading-relaxed mb-6">
+                        Bridging the gap between you and your favorite local stores. Get everything you need delivered to your doorstep.
+                    </p>
+</div>
+<div>
+<h4 class="font-bold mb-6">Quick Links</h4>
+<ul class="space-y-3 text-sm text-primary/70">
+<li><a class="hover:text-white" href="#">Home</a></li>
+<li><a class="hover:text-white" href="#">Explore Stores</a></li>
+<li><a class="hover:text-white" href="#">My Orders</a></li>
+<li><a class="hover:text-white" href="#">Offers &amp; Deals</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6">Support</h4>
+<ul class="space-y-3 text-sm text-primary/70">
+<li><a class="hover:text-white" href="#">Help Center</a></li>
+<li><a class="hover:text-white" href="#">Become a Partner</a></li>
+<li><a class="hover:text-white" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-white" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6">Connect With Us</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-white/10 mt-12 pt-8 text-center text-sm text-primary/50">
+                © 2024 NearKart. All rights reserved.
+            </div>
+</footer>
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden" id="profile-overlay" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); this.classList.add('hidden');"></div>
+<div class="fixed right-0 top-0 h-full w-[340px] bg-white dark:bg-slate-900 z-[70] shadow-2xl transition-transform duration-300 translate-x-full flex flex-col" id="profile-panel">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold dark:text-white">Profile</h2>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); document.getElementById('profile-overlay').classList.add('hidden');">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl mb-8">
+<div class="h-14 w-14 rounded-full bg-slate-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASuhoFBi4GigAiI-8pXVL06IqYy-cmxLCtV3ZMWO6HEqmpKvsvcGS1xsrR3hwIFRHHis3VSXBlFontaJnNJHfMwqWPZZ86nkAXDZfPS0NyvWZxqHLAEA99ufq0w1yd5V1ZjpPpoJUC2z0NxSPlw0KT1HpiJ-ZXIKsZwF9SJytecttarGu7Ac1fkFKN1TTIDwqsaHrBjKNZsLPo_ykabW90nvgIxlRNkDZSw8XswNh4eyPFy02U8YZjVTYDziDPr4mceUlWRL388aA');"></div>
+<div>
+<h3 class="font-bold dark:text-white">{{ request.user|truncatechars:12 }}</h3>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 text-primary font-semibold" href="{% url 'userhome' %}">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'savedoffers' %}">
+<span class="material-symbols-outlined">favorite</span> Saved Offers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="{% url 'active_coupons' %}">
+<span class="material-symbols-outlined">local_activity</span> Active Coupons
+            </a>
+<!-- <div class="pt-4 pb-2">
+<span class="px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Settings</span>
+</div> -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">person</span> Profile
+            </a>
+<!-- <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">notifications</span> Notifications
+            </a> -->
+</nav>
+<a href="{% url 'logout' %}">
+<button class="mt-auto flex items-center justify-center gap-2 w-full p-4 border border-slate-200 dark:border-slate-700 rounded-xl font-bold text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">logout</span> Logout
+        </button></a>
+</div>
+</div>
+<script>
+const url = new URL(window.location.href);
+
+if (!url.searchParams.get("lat") || !url.searchParams.get("lng")) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        url.searchParams.set("lat", position.coords.latitude);
+        url.searchParams.set("lng", position.coords.longitude);
+        window.location.href = url;
+    });
+}
+</script>
+</body></html>

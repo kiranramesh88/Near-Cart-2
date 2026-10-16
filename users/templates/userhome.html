@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NearKart - Explore Local Offers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0a3d61",
+                        "primary-light": "#e6f0f5",
+                        "primary-dark": "#06263d",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2936",
+                        "text-primary": "#0e161b",
+                        "text-secondary": "#4d7999",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        lg: "1.5rem",
+                        xl: "2rem",
+                        "2xl": "3rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-primary font-display antialiased overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-6 py-3 lg:px-10 shadow-sm">
+<div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-3 text-primary dark:text-white shrink-0">
+<div class="size-8 flex items-center justify-center bg-primary text-white rounded-lg">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">NearKart</h2>
+</div>
+<div class="hidden md:flex flex-1 max-w-xl mx-auto">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="block w-full p-2.5 pl-10 text-sm text-slate-900 border border-slate-200 rounded-lg bg-slate-50 focus:ring-primary focus:border-primary dark:bg-slate-800 dark:border-slate-700 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary" placeholder="Search offers, stores, categories..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6 shrink-0">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-text-primary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Trending</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Saved</a>
+</nav>
+<div class="flex gap-3"><div class="flex items-center gap-3 cursor-pointer group" onclick="document.getElementById('profile-panel').classList.remove('translate-x-full'); document.getElementById('profile-overlay').classList.remove('hidden');">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASuhoFBi4GigAiI-8pXVL06IqYy-cmxLCtV3ZMWO6HEqmpKvsvcGS1xsrR3hwIFRHHis3VSXBlFontaJnNJHfMwqWPZZ86nkAXDZfPS0NyvWZxqHLAEA99ufq0w1yd5V1ZjpPpoJUC2z0NxSPlw0KT1HpiJ-ZXIKsZwF9SJytecttarGu7Ac1fkFKN1TTIDwqsaHrBjKNZsLPo_ykabW90nvgIxlRNkDZSw8XswNh4eyPFy02U8YZjVTYDziDPr4mceUlWRL388aA');"></div>
+<div class="hidden sm:flex flex-col">
+<span class="text-sm font-bold text-slate-900 dark:text-white">{{data.username}}</span>
+<!-- <span class="text-[10px] font-medium text-primary uppercasforme tracking-wider"></span> -->
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">expand_more</span>
+</div></div>
+</div>
+</div>
+</header>
+<div class="max-w-[1440px] mx-auto w-full flex flex-col md:flex-row min-h-[calc(100vh-65px)]">
+<!-- Left Sidebar / Filters -->
+<aside class="w-72 shrink-0 border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark p-6 transition-all duration-300 ease-in-out md:sticky md:top-[65px] h-screen overflow-hidden group/sidebar" id="filter-sidebar"><button class="mb-6 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center w-full" onclick="const s=document.getElementById('filter-sidebar'); const isC=s.classList.contains('w-72'); s.classList.toggle('w-72', !isC); s.classList.toggle('w-20', isC); s.querySelectorAll('.sidebar-content').forEach(c => c.classList.toggle('hidden', isC));">
+<span class="material-symbols-outlined text-slate-500">menu_open</span>
+</button>
+<div class="flex items-center justify-between mb-6 sidebar-content">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Filters</h3>
+<button class="text-sm text-primary font-medium hover:underline">Reset</button>
+</div>
+<!-- Categories -->
+<div class="mb-8 sidebar-content">
+<h4 class="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-4">Categories</h4>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-primary-light/50 dark:hover:bg-slate-800 cursor-pointer group transition-colors">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<div class="p-1.5 bg-green-100 text-green-700 rounded-md">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+</div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Groceries</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-primary-light/50 dark:hover:bg-slate-800 cursor-pointer group transition-colors bg-primary-light/30">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<div class="p-1.5 bg-blue-100 text-blue-700 rounded-md">
+<span class="material-symbols-outlined text-[18px]">devices</span>
+</div>
+<span class="text-sm font-medium text-primary dark:text-white">Electronics</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-primary-light/50 dark:hover:bg-slate-800 cursor-pointer group transition-colors">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<div class="p-1.5 bg-purple-100 text-purple-700 rounded-md">
+<span class="material-symbols-outlined text-[18px]">checkroom</span>
+</div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Fashion</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-primary-light/50 dark:hover:bg-slate-800 cursor-pointer group transition-colors">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<div class="p-1.5 bg-orange-100 text-orange-700 rounded-md">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+</div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Dining</span>
+</label>
+</div>
+</div>
+<!-- Distance Slider -->
+<div class="mb-8 sidebar-content">
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-xs font-semibold uppercase tracking-wider text-text-secondary">Distance</h4>
+<span class="text-sm font-bold text-primary">5 km</span>
+</div>
+<input class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary dark:bg-slate-700" max="50" min="1" type="range" value="5"/>
+<div class="flex justify-between mt-2 text-xs text-text-secondary">
+<span>1km</span>
+<span>50km</span>
+</div>
+</div>
+<!-- Discount -->
+<div class="mb-8 sidebar-content">
+<h4 class="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-4">Min. Discount</h4>
+<div class="grid grid-cols-3 gap-2">
+<button class="px-3 py-2 text-xs font-medium border border-slate-200 rounded-lg hover:border-primary hover:text-primary dark:border-slate-700 dark:text-slate-300 transition-all">10%+</button>
+<button class="px-3 py-2 text-xs font-medium bg-primary text-white border border-primary rounded-lg shadow-sm">25%+</button>
+<button class="px-3 py-2 text-xs font-medium border border-slate-200 rounded-lg hover:border-primary hover:text-primary dark:border-slate-700 dark:text-slate-300 transition-all">50%+</button>
+</div>
+</div>
+<!-- Verified Toggle -->
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 sidebar-content">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Verified Only</span>
+<span class="text-xs text-text-secondary">Trusted merchants</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-6 lg:p-10 bg-background-light dark:bg-background-dark">
+<!-- Breadcrumb & Header -->
+<div class="flex flex-col gap-4 mb-8">
+<div class="flex items-center gap-2 text-sm text-text-secondary">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">Explore Offers</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Discover Local Deals</h1>
+<p class="text-text-secondary mt-1">Found 124 premium offers near you</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm text-text-secondary">Sort by:</span>
+<select class="form-select bg-transparent border-none text-sm font-semibold text-slate-900 dark:text-white focus:ring-0 cursor-pointer pr-8 py-0">
+<option>Recommended</option>
+<option>Distance</option>
+<option>Discount</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col overflow-hidden relative">
+<!-- Image Area -->
+<div class="relative w-full overflow-hidden h-40">
+<img alt="Product Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Red Nike running shoes displayed on a bright red background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR2SRH85mVfUVp2qMDx-kbH7h3xSbNlCBZZZ5Cv7lwOneUOS9HnQjm390C3CLu14F30lttZtyK0DmPlnrii9Uo671aXqJRlKzF6yZ6of1w6E2xU_EuCxNYQKUhE6Q7UQHVD1V3hY1K1MdJ3mhpwmf9n6MYDQDS7pXY0Mh_-8n0dKps_FsokkEXj-7MxVPq4R-eYNmMQvfQnKK4J6uDcRggVUoiZNZgaE8X24jVBiMaqFx6mvuIoHcnlUsNbFXqMOYtVL21Ei0gSA8"/>
+<!-- Pulse Badge -->
+<div class="absolute top-3 left-3 flex items-center">
+<span class="relative flex h-3 w-3 mr-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+</span>
+<span class="bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md">-40% OFF</span>
+</div>
+<!-- Distance Badge -->
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span class="text-xs font-semibold text-slate-800 dark:text-slate-200">0.8 km</span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-primary transition-colors">Nike Air Max Limited</h3>
+<p class="text-sm text-text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">store</span>
+                                    Urban Sole Store
+                                </p>
+</div>
+</div>
+<!-- Price & Stock -->
+<div class="flex items-center gap-3 mb-4 mt-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$89.99</span>
+<span class="text-sm text-text-secondary line-through decoration-red-400">$149.99</span>
+<span class="ml-auto text-xs font-medium text-orange-600 bg-orange-50 dark:bg-orange-900/20 px-2 py-0.5 rounded border border-orange-100 dark:border-orange-800">Low Stock</span>
+</div>
+<!-- Meta & Verification -->
+<div class="flex items-center gap-2 mb-5">
+<div class="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-2 py-1 rounded text-[10px] font-semibold border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                                Verified
+                            </div>
+<div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 text-text-secondary px-2 py-1 rounded text-[10px] font-medium border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-[12px]">group</span>
+                                24 claimed
+                            </div>
+</div>
+<!-- Action -->
+<button class="mt-auto w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-[#0f5485] text-white font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group/btn">
+                            Reveal Offer
+                            <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative w-full overflow-hidden h-40">
+<img alt="Food Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Fresh organic vegetables and salad bowl on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAimjFtQEmcsI6CgYi5Hp7Sx_UFcF6nenLWCRUoTJwZJtaiI1TRkBeEgMCmqlnm3kbgLgbQYhKRtPKbRkwOlZYFYrckr6lFj1rloPnTE_yjLVNDTVZs_BdX3042XKTDyjU2vJkAb3x9k4HVWfojctIhppa_o77aR65LMcYH6kw707juNMSWsErKYAYEhlHjwHnQ-0xyxxBZgmMjHu7D9axPaI6sZy54r0cG__nLeSRcqDBhrNZFNu2af42-HA1MHehx7487fPzC8eY"/>
+<div class="absolute top-3 left-3 flex items-center">
+<span class="bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md">BOGO Free</span>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span class="text-xs font-semibold text-slate-800 dark:text-slate-200">1.2 km</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-primary transition-colors">Fresh Organic Salad Bowl</h3>
+<p class="text-sm text-text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">store</span>
+                                    Green Leaf Market
+                                </p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-4 mt-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$12.50</span>
+<span class="text-sm text-text-secondary">for two</span>
+<span class="ml-auto text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded border border-green-100 dark:border-green-800">Available</span>
+</div>
+<div class="flex items-center gap-2 mb-5">
+<div class="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-2 py-1 rounded text-[10px] font-semibold border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                                Verified
+                            </div>
+<div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 text-text-secondary px-2 py-1 rounded text-[10px] font-medium border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+                                Ends in 2h
+                            </div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-[#0f5485] text-white font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group/btn">
+                            Reveal Offer
+                            <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative w-full overflow-hidden h-40">
+<img alt="Tech Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern electronics store display with headphones and gadgets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqVeRUJ4GWamdyPkaO_QEywBjp4at0TEzx-PVMlQn1-QPw_GvHBcUVG6-04lXfhCGGvEDizuub6F7w7MKn-gX1hJJUN_9YNFs-OJHV_IJdUfRt8OcYZtoUIO-6cm3dItZkV4C-l4bWWB8JlbUFAK1OKtjgmC0NV7BjqSN2DkL3KCgEPvHzjYT_z4MyVrTbwluiDU-zVMBv2ryg551an-ZuOxN57HHtoFjhutFH_a4v55i7cIT9EpGcIdhX9g1RF6kQUeQb4v5JLZY"/>
+<div class="absolute top-3 left-3 flex items-center">
+<span class="relative flex h-3 w-3 mr-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+</span>
+<span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md">Clearance</span>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span class="text-xs font-semibold text-slate-800 dark:text-slate-200">2.5 km</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-primary transition-colors">Sony WH-1000XM5</h3>
+<p class="text-sm text-text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">store</span>
+                                    Tech Hub Electronics
+                                </p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-4 mt-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$299</span>
+<span class="text-sm text-text-secondary line-through">$349</span>
+<span class="ml-auto text-xs font-medium text-orange-600 bg-orange-50 dark:bg-orange-900/20 px-2 py-0.5 rounded border border-orange-100 dark:border-orange-800">Last 3</span>
+</div>
+<div class="flex items-center gap-2 mb-5">
+<div class="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-2 py-1 rounded text-[10px] font-semibold border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                                Verified
+                            </div>
+<div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 text-text-secondary px-2 py-1 rounded text-[10px] font-medium border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-[12px]">thumb_up</span>
+                                Top Rated
+                            </div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-[#0f5485] text-white font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group/btn">
+                            Reveal Offer
+                            <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative w-full overflow-hidden h-40">
+<img alt="Shoe Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Black running sneakers isolated on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPs41aVt_K5iInXWkNC7qBKsJ7u9b2slvKoEEXzwRNCW-OvILyIT9m9S3OB7yfsUa1b_iFx8qOLCR09okRtxo68l98H-W92H8gI1xvT0NBRzeyTcez4kjBQYi8HHlwpQzu3MzfS5sUvnAWtYc-nCWgR23e4SH9ZKYIl-vJNBxEdsi59kQxBktUhO6luT0wrREXQy45GvJHfsFs5zUdHgS8ZXugZrfNZ3ENv2xRO0SmRwnQlb8sxEnU1p9rGIoUxCYM5xsOYm8n4Wk"/>
+<div class="absolute top-3 left-3 flex items-center">
+<span class="bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md">-20% OFF</span>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span class="text-xs font-semibold text-slate-800 dark:text-slate-200">3.1 km</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-primary transition-colors">Ultraboost Running v2</h3>
+<p class="text-sm text-text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">store</span>
+                                    SportDirect Outlet
+                                </p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-4 mt-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$145</span>
+<span class="text-sm text-text-secondary line-through">$180</span>
+<span class="ml-auto text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded border border-green-100 dark:border-green-800">Available</span>
+</div>
+<div class="flex items-center gap-2 mb-5">
+<div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 text-text-secondary px-2 py-1 rounded text-[10px] font-medium border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-[12px]">local_fire_department</span>
+                                Trending
+                            </div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-[#0f5485] text-white font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group/btn">
+                            Reveal Offer
+                            <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative w-full overflow-hidden h-40">
+<img alt="Lifestyle Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Athletic woman eating healthy salad bowl after workout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCabbVYUhrzYP1muYCaDLYSnTH0r9VJ188vzyrGls2Ic7Z4f5gkwDtu4bDm7ll42kPn0NEoyfrhTVVkefXo6kdUEFTzvQ7EN_NyH-_0Rh7_gF3NK9YR1QS48foWldlkNaApbNWDpgQK3eutoJxqpLJQNhZblL7_W0DWJwRIzIFeiUPS3Kc2y4E_1Dg152SQLaKyg1Z-0Wm8RFidWCCPynLc1qYKvw9U6KSV30UmRSmc_WqkCmfMEieyYl4d4Bop-AjWcc3X3-yEp8s"/>
+<div class="absolute top-3 left-3 flex items-center">
+<span class="relative flex h-3 w-3 mr-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+</span>
+<span class="bg-purple-600 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md">Member Deal</span>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span class="text-xs font-semibold text-slate-800 dark:text-slate-200">0.5 km</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-primary transition-colors">Premium Gym Annual Pass</h3>
+<p class="text-sm text-text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">store</span>
+                                    FitLife Center
+                                </p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-4 mt-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$399</span>
+<span class="text-sm text-text-secondary line-through">$599</span>
+<span class="ml-auto text-xs font-medium text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-2 py-0.5 rounded border border-purple-100 dark:border-purple-800">Limited</span>
+</div>
+<div class="flex items-center gap-2 mb-5">
+<div class="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-2 py-1 rounded text-[10px] font-semibold border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                                Verified
+                            </div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-[#0f5485] text-white font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group/btn">
+                            Reveal Offer
+                            <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative w-full overflow-hidden h-40">
+<img alt="Fashion Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Elegant casual brown leather shoes on wooden floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC_HQEoYUFs-fu_KhxVvHHlmp8S2P0qGmn1zJykj3pw4iqIwIPVxwnWoenfjwdPnmt14fqiFlfTS9-KJw4pyvKUbuoO7ClnxLVAY5hno9stKuYJM3IyDxP-U-0B4KmWkV9ZIlXtrd-UmpYm7O5j5Ssw1Y2YO-vAfU4J62t1FwCOyUfcFmKX-iZUwHz6P4xvlLf8OouOkXDkfFsvxqXhj-brjhnwTCrIxGPwEGTvvSgZGch2HoDnQWVJjceFuF-FDZfYceWjlwUeAU"/>
+<div class="absolute top-3 left-3 flex items-center">
+<span class="bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md">-15% OFF</span>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span class="text-xs font-semibold text-slate-800 dark:text-slate-200">5.2 km</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-primary transition-colors">Italian Leather Boots</h3>
+<p class="text-sm text-text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">store</span>
+                                    The Shoe Cobbler
+                                </p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-4 mt-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$185</span>
+<span class="text-sm text-text-secondary line-through">$220</span>
+<span class="ml-auto text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded border border-green-100 dark:border-green-800">Available</span>
+</div>
+<div class="flex items-center gap-2 mb-5">
+<div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 text-text-secondary px-2 py-1 rounded text-[10px] font-medium border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-[12px]">star</span>
+                                4.9 Rating
+                            </div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-[#0f5485] text-white font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group/btn">
+                            Reveal Offer
+                            <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-12 flex justify-center">
+<button class="px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-full shadow-sm hover:shadow hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center gap-2">
+                    Load More Offers
+                    <span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+</div>
+</main>
+</div>
+<!-- Profile Slide-out Panel -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden" id="profile-overlay" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); this.classList.add('hidden');"></div>
+<div class="fixed right-0 top-0 h-full w-[340px] bg-white dark:bg-slate-900 z-[70] shadow-2xl transition-transform duration-300 translate-x-full flex flex-col" id="profile-panel">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold dark:text-white">Profile</h2>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" onclick="document.getElementById('profile-panel').classList.add('translate-x-full'); document.getElementById('profile-overlay').classList.add('hidden');">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl mb-8">
+<div class="h-14 w-14 rounded-full bg-slate-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASuhoFBi4GigAiI-8pXVL06IqYy-cmxLCtV3ZMWO6HEqmpKvsvcGS1xsrR3hwIFRHHis3VSXBlFontaJnNJHfMwqWPZZ86nkAXDZfPS0NyvWZxqHLAEA99ufq0w1yd5V1ZjpPpoJUC2z0NxSPlw0KT1HpiJ-ZXIKsZwF9SJytecttarGu7Ac1fkFKN1TTIDwqsaHrBjKNZsLPo_ykabW90nvgIxlRNkDZSw8XswNh4eyPFy02U8YZjVTYDziDPr4mceUlWRL388aA');"></div>
+<div>
+<h3 class="font-bold dark:text-white">{{data.username}}</h3>
+<!-- <p class="text-xs text-primary font-semibold uppercase"></p> -->
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">favorite</span> Saved Offers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">local_activity</span> Active Coupons
+            </a>
+<div class="pt-4 pb-2">
+<span class="px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Settings</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">person</span> Profile
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">notifications</span> Notifications
+            </a>
+</nav>
+<button class="mt-auto flex items-center justify-center gap-2 w-full p-4 border border-slate-200 dark:border-slate-700 rounded-xl font-bold text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">logout</span> Logout
+        </button>
+</div>
+</div></body></html>

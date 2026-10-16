@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NearKart - Redeem Coupon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a3d61",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111a21",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-6 py-3 lg:px-10 shadow-sm">
+<div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-3 text-primary dark:text-white shrink-0">
+<div class="size-8 flex items-center justify-center bg-primary text-white rounded-lg">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">NearKart</h2>
+</div>
+<div class="hidden md:flex flex-1 max-w-xl mx-auto">
+<!-- <div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input id="searchInput" class="block w-full p-2.5 pl-10 text-sm text-slate-900 border border-slate-200 rounded-lg bg-slate-50 focus:ring-primary focus:border-primary dark:bg-slate-800 dark:border-slate-700 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary" placeholder="Search offers, stores, categories..." type="text"/>
+</div> -->
+</div>
+<div class="flex items-center gap-6 shrink-0">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-text-prmiary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-text-secondary dark:text-slate-200 text-sm font-medium hover:text-primary transition-colors" href="{% url 'storelist' %}">Stores</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'active_coupons' %}">My Coupons</a>
+<a class="text-text-secondary dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="{% url 'savedoffers' %}">Saved</a>
+</nav>
+<div class="flex gap-3">
+<div class="flex items-center gap-3 cursor-pointer group" onclick="document.getElementById('profile-panel').classList.remove('translate-x-full'); document.getElementById('profile-overlay').classList.remove('hidden');" style="background-image: url('{{ profile.profile_image.url }}');">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/10"></div>
+<div class="hidden sm:flex flex-col">
+<!-- <span class="text-sm font-bold text-slate-900 dark:text-white">{{ request.user|truncatechars:12 }}</span> -->
+<!-- <span class="text-[10px] font-medium text-primary uppercase tracking-wider">Gold Member</span> -->
+</div>
+<!-- <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">expand_more</span> -->
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-6 px-4 lg:px-20">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-6">
+<div class="flex items-center gap-2 text-primary/70 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Wallet</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100">Redeem Coupon</span>
+</div>
+<!-- <div class="flex flex-col gap-4 items-center bg-white dark:bg-slate-800/50 p-6 rounded-xl shadow-sm border border-primary/5">  -->
+<!-- Main Horizontal Section -->
+<div class="flex flex-col md:flex-row gap-6">
+<!-- Left Column: Coupon Card -->
+<div class="flex-1 bg-primary text-white rounded-xl p-8 relative overflow-hidden shadow-xl flex flex-col items-center justify-center">
+<div class="absolute -right-8 -top-8 size-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute -left-8 -bottom-8 size-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="relative z-10 flex flex-col items-center text-center w-full">
+<span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">Limited Time Offer</span>
+<h3 class="text-4xl font-black mb-1">{{ coupon.offer.discount_percentage|floatformat:1 }}% OFF</h3>
+<p class="text-white/80 font-medium mb-6">{{ coupon.shop.shop_name }}</p>
+{% if not coupon.is_redeemed %}
+<div class="w-full max-w-[280px] bg-white rounded-xl p-4 mb-4 flex flex-col items-center gap-4">
+<div class="bg-slate-50 p-2 rounded-lg w-full">
+<div class="aspect-square w-32 mx-auto bg-white flex items-center justify-center relative">
+<img src="{{ coupon.qr_code.url }}" alt="qr_code" >
+<div class="w-full h-full bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:8px_8px]" data-alt="High resolution QR code for digital redemption"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-10">
+
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 items-center mt-2">
+<span class="text-slate-400 text-[10px] font-bold uppercase">Coupon Code</span>
+<span id="couponCode" class="text-slate-900 text-lg font-mono font-bold tracking-[0.2em]">{{ coupon.code }}</span>
+ <!-- Copy Icon -->
+    <button onclick="copyCoupon()" 
+        class="p-2 rounded-full hover:bg-gray-200 transition">
+
+        <span class="material-symbols-outlined text-gray-600 text-lg">
+            content_copy
+        </span>
+    </button>
+</div>
+<p id="copyMsg" class="text-xs text-green-500 mt-1 hidden">
+    Copied!
+</p>
+</div>
+<div class="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-full text-sm font-medium">
+<span class="material-symbols-outlined text-lg animate-pulse">timer</span>
+<span id="countdown"
+      data-expiry="{{ coupon.valid_to|date:'c' }}">Expires in: </span>
+</div>
+{% else %}
+<div class="w-full max-w-[280px] bg-white rounded-xl p-4 mb-4 flex flex-col items-center gap-4">
+<div class="flex flex-col items-center justify-center py-6 gap-4">
+<div class="size-16 bg-green-100 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-green-600 font-bold">check</span>
+</div>
+<p class="text-primary font-bold text-lg text-center leading-tight">Coupon Redeemed Successfully</p>
+</div>
+</div>
+{% endif %}
+</div>
+</div>
+<!-- Right Column: Instructions -->
+{% if not coupon.is_redeemed %}
+<div class="flex-1 flex flex-col gap-4">
+<div class="h-full flex flex-col gap-3 bg-white dark:bg-slate-800/50 p-8 rounded-xl border border-primary/5">
+<h4 class="text-slate-900 dark:text-slate-100 text-lg font-bold flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">info</span>
+                            How to redeem
+                        </h4>
+<ul class="flex flex-col gap-6 text-base text-slate-600 dark:text-slate-400">
+<li class="flex gap-4">
+<span class="size-6 flex items-center justify-center bg-primary/10 text-primary rounded-full text-sm font-bold shrink-0">1</span>
+<span>Present this screen to the cashier before checkout.</span>
+</li>
+<li class="flex gap-4">
+<span class="size-6 flex items-center justify-center bg-primary/10 text-primary rounded-full text-sm font-bold shrink-0">2</span>
+<span>Cashier will scan the QR code or enter the manual code.</span>
+</li>
+<li class="flex gap-4">
+<span class="size-6 flex items-center justify-center bg-primary/10 text-primary rounded-full text-sm font-bold shrink-0">3</span>
+<span>Discount will be applied to your total bill automatically.</span>
+</li>
+</ul>
+<div class="mt-auto pt-6">
+<p class="text-slate-400 text-xs italic">
+                                Note: Digital redemption is preferred for faster checkout and points accrual.
+                            </p>
+</div>
+</div>
+</div>
+{% endif %}
+</div>
+<!-- Centered Action Buttons -->
+<!-- <div class="flex flex-col md:flex-row gap-4 items-center justify-center max-w-[600px] mx-auto w-full mt-2">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg active:scale-[0.98]">
+<span class="material-symbols-outlined">present_to_all</span>
+                    Show to Merchant
+                </button>
+<button class="w-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined">share</span>
+                    Share with Friend
+                </button>
+</div> -->
+<div class="text-center py-4">
+<p class="text-slate-400 text-xs px-8">
+                    Terms &amp; Conditions apply. This coupon is valid for one-time use only at participating Gourmet Garden Market locations. Cannot be combined with other offers.
+                </p>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-primary/10 bg-white dark:bg-background-dark/80 py-8 px-6 lg:px-40">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2 text-primary/50">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-bold tracking-tight">NearKart</span>
+</div>
+<div class="flex gap-6 text-sm font-medium text-slate-500">
+<a class="hover:text-primary" href="#">Help Center</a>
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Use</a>
+</div>
+<p class="text-slate-400 text-xs">© 2026 NearKart</p>
+</div>
+</footer>
+</div>
+</div>
+<script>
+function copyCoupon() {
+    const code = document.getElementById("couponCode").innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+        
+        // Show "Copied!" message
+        const msg = document.getElementById("copyMsg");
+        msg.classList.remove("hidden");
+
+        setTimeout(() => {
+            msg.classList.add("hidden");
+        }, 1500);
+        const icon = event.currentTarget.querySelector("span");
+        icon.innerText = "check";
+
+        setTimeout(() => {
+            icon.innerText = "content_copy";
+        }, 1500);
+    }).catch(err => {
+        console.error("Failed to copy:", err);
+    });
+}
+</script>
+<script>
+function startCountdown() {
+    const countdownEl = document.getElementById("countdown");
+    const expiryTime = new Date(countdownEl.dataset.expiry).getTime();
+
+    function updateTimer() {
+        const now = new Date().getTime();
+        const distance = expiryTime - now;
+
+        if (distance <= 0) {
+            countdownEl.innerText = "Expired";
+            countdownEl.parentElement.classList.remove("bg-black/20");
+            countdownEl.parentElement.classList.add("bg-red-500");
+            return;
+        }
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownEl.innerText = `Expires in: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    updateTimer(); // initial
+    setInterval(updateTimer, 1000);
+}
+
+startCountdown();
+</script>
+<script>
+const searchInput = document.getElementById("searchInput");
+
+// 🔍 ENTER SEARCH
+searchInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+
+        const query = this.value.trim();
+
+        if (query === "") {
+            window.location.reload();
+            return;
+        }
+
+        fetch(`/customer/search-api/?q=${query}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("offersContainer").innerHTML = data.html;
+        });
+    }
+});
+
+
+// 🔄 CLEAR INPUT → RESET PAGE
+searchInput.addEventListener("input", function() {
+    if (this.value.trim() === "") {
+        window.location.href = "/users/userhome";  // ✅ your correct route
+    }
+});
+</script>
+</body></html>
