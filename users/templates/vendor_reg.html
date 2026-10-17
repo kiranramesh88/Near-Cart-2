@@ -114,36 +114,62 @@
 </label>
 </div>
 <!-- Full Name -->
+<div>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">person</span>
-<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Full Name" type="text" name="first_name"/>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all {% if form.first_name.errors %}ring-red-400{% endif %}" placeholder="Full Name" type="text" name="first_name" value="{{ form.first_name.value|default:'' }}"/>
+</div>
+{% if form.first_name.errors %}<p class="text-red-500 text-xs mt-1 ml-1">{{ form.first_name.errors|join:", " }}</p>{% endif %}
 </div>
 <!-- Username -->
+<div>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">person</span>
-<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Username" type="text" name="username"/>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all {% if form.username.errors %}ring-red-400{% endif %}" placeholder="Username" type="text" name="username" value="{{ form.username.value|default:'' }}"/>
+</div>
+{% if form.username.errors %}<p class="text-red-500 text-xs mt-1 ml-1">{{ form.username.errors|join:", " }}</p>{% endif %}
 </div>
 <!-- Email -->
+<div>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
-<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Email Address" type="email" name="email"/>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all {% if form.email.errors %}ring-red-400{% endif %}" placeholder="Email Address" type="email" name="email" value="{{ form.email.value|default:'' }}"/>
 </div>
-<!-- <input type="text" class="hidden" name="username" value=""> -->
+{% if form.email.errors %}<p class="text-red-500 text-xs mt-1 ml-1">{{ form.email.errors|join:", " }}</p>{% endif %}
+</div>
 <!-- Phone -->
+<div>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">call</span>
-<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Phone Number" type="number" name="phone"/>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all {% if form.phone.errors %}ring-red-400{% endif %}" placeholder="Phone Number" type="number" name="phone" value="{{ form.phone.value|default:'' }}"/>
+</div>
+{% if form.phone.errors %}<p class="text-red-500 text-xs mt-1 ml-1">{{ form.phone.errors|join:", " }}</p>{% endif %}
 </div>
 <!-- Password -->
+<div>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
-<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Password" type="password" name="password1"/>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all {% if form.password1.errors %}ring-red-400{% endif %}" placeholder="Password" type="password" name="password1"/>
+</div>
+{% if form.password1.errors %}<p class="text-red-500 text-xs mt-1 ml-1">{{ form.password1.errors|join:", " }}</p>{% endif %}
 </div>
 <!-- Confirm Password -->
+<div>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock_reset</span>
-<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Confirm Password" type="password" name="password2"/>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary outline-none transition-all {% if form.password2.errors %}ring-red-400{% endif %}" placeholder="Confirm Password" type="password" name="password2"/>
 </div>
+{% if form.password2.errors %}<p class="text-red-500 text-xs mt-1 ml-1">{{ form.password2.errors|join:", " }}</p>{% endif %}
+</div>
+<!-- Non-field errors (e.g. password mismatch) -->
+{% if form.non_field_errors %}
+<div class="flex items-start gap-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/30 rounded-xl text-red-600 dark:text-red-400">
+    <span class="material-symbols-outlined text-lg mt-0.5">error</span>
+    <ul class="text-xs font-medium list-disc list-inside space-y-1">
+        {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+    </ul>
+</div>
+{% endif %}
 <!-- Location Section -->
 <div class="p-4 bg-primary/5 dark:bg-primary/10 rounded-xl flex items-center justify-between border border-primary/10">
 <div class="flex items-center gap-3">
@@ -158,21 +184,20 @@
 <input type="hidden" id="latitude" name="latitude">
 <input type="hidden" id="longitude" name="longitude">
 {% if messages %}
-                    {% for i in messages %}
-                        {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                            <div class="flex items-center gap-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 rounded text-red-600 dark:text-red-400 mb-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                            <span class="material-symbols-outlined text-lg">error</span>
-                            <p class="text-xs font-medium italic">Please allow location access.</p>
-                            </div>  
-                        {% endif %}
-                        {% if i.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-                            <div class="flex items-center gap-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-red-100 dark:border-yellow-900/30 rounded text-yellow-600 dark:text-yellow-400 mb-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                            <span class="material-symbols-outlined text-lg">error</span>
-                            <p class="text-xs font-medium italic">Enter valid credentials</p>
-                            </div>  
-                        {% endif %}
-                    {% endfor %}
-                
+    {% for i in messages %}
+        {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div class="flex items-center gap-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 rounded-xl text-red-600 dark:text-red-400">
+                <span class="material-symbols-outlined text-lg">error</span>
+                <p class="text-xs font-medium italic">Please allow location access.</p>
+            </div>
+        {% endif %}
+        {% if i.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <div class="flex items-center gap-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-100 dark:border-yellow-900/30 rounded-xl text-yellow-600 dark:text-yellow-400">
+                <span class="material-symbols-outlined text-lg">warning</span>
+                <p class="text-xs font-medium italic">Enter valid details</p>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endif %}
 <!-- Submit Button -->
 <button class="w-full py-4 bg-gradient-to-r from-primary to-[#1a5a8a] text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98] transition-all mt-4" type="submit">
