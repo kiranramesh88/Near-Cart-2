@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
 from django.conf import settings as django_settings
+from django.utils.timezone import now
 
 
 
@@ -39,7 +40,7 @@ class LandingView(View):
     
 class trendingOfferview(View):
     def get(self,request):
-        return render(request,"trendig_offr.html")
+        return render(request,"trending_offr.html")
 
 class UserRegistrationView(View):
 

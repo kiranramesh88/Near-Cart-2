@@ -24,11 +24,11 @@ class User(AbstractUser):
 class CustomerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="customer_profile")
 
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15, blank=True, default="")
     profile_image = models.ImageField(upload_to="customer_profiles/", null=True, blank=True)
 
-    address = models.TextField()
-    city = models.CharField(max_length=100)
+    address = models.TextField(blank=True, default="")
+    city = models.CharField(max_length=100, blank=True, default="")
 
     date_of_birth = models.DateField(null=True, blank=True)
 
@@ -40,11 +40,11 @@ class CustomerProfile(models.Model):
 class VendorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="vendor_profile")
 
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15, blank=True, default="")
     profile_image = models.ImageField(upload_to="vendor_profiles/", null=True, blank=True)
 
-    address = models.TextField()
-    city = models.CharField(max_length=100)
+    address = models.TextField(blank=True, default="")
+    city = models.CharField(max_length=100, blank=True, default="")
 
     business_name = models.CharField(max_length=255)
     gst_number = models.CharField(max_length=50, blank=True, null=True)

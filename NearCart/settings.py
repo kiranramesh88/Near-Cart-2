@@ -134,6 +134,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Ensure the staticfiles directory exists so WhiteNoise doesn't warn on startup
+STATIC_ROOT.mkdir(parents=True, exist_ok=True)
+
 # WhiteNoise storage for compressed/cached static files in production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
